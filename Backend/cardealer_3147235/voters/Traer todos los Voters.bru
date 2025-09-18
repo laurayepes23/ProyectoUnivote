@@ -1,0 +1,15 @@
+meta {
+  name: Traer todos los Voters 
+  type: http
+  seq: 1
+}
+
+get {
+  url: http://localhost:3010/voters
+  body: none
+  auth: inherit
+}
+
+settings {
+  encodeUrl: true
+}

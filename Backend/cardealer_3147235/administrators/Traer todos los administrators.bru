@@ -1,0 +1,15 @@
+meta {
+  name: Traer todos los administrators
+  type: http
+  seq: 2
+}
+
+get {
+  url: http://localhost:3010/administrators
+  body: none
+  auth: inherit
+}
+
+settings {
+  encodeUrl: true
+}

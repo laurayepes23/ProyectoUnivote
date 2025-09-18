@@ -1,0 +1,25 @@
+meta {
+  name: crear un administrator
+  type: http
+  seq: 2
+}
+
+post {
+  url: http://localhost:3010/administrators
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "id" : 3,
+    "name" : "Martin",
+    "description" : "Docente de la universidad"
+  }
+  
+  
+}
+
+settings {
+  encodeUrl: true
+}

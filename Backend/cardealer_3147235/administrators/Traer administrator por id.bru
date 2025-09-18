@@ -1,0 +1,15 @@
+meta {
+  name: Traer administrator por id
+  type: http
+  seq: 2
+}
+
+get {
+  url: http://localhost:3010/administrators/1
+  body: none
+  auth: inherit
+}
+
+settings {
+  encodeUrl: true
+}

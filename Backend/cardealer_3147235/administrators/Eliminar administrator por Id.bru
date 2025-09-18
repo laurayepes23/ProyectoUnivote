@@ -1,0 +1,15 @@
+meta {
+  name: Eliminar administrator por Id
+  type: http
+  seq: 2
+}
+
+delete {
+  url: http://localhost:3010/administrators/3
+  body: none
+  auth: inherit
+}
+
+settings {
+  encodeUrl: true
+}
