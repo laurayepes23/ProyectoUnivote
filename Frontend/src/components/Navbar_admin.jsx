@@ -5,7 +5,7 @@ const Navbar_admin = () => {
     const [menuOpen, setMenuOpen] = useState(false);
     const [openSubmenu, setOpenSubmenu] = useState(null);
     const [profileOpen, setProfileOpen] = useState(false);
-    const navigate = useNavigate(); // Hook para la navegación
+    const navigate = useNavigate();
 
     const toggleSubmenu = (menu) => {
         setOpenSubmenu(openSubmenu === menu ? null : menu);
@@ -16,14 +16,14 @@ const Navbar_admin = () => {
         localStorage.removeItem('token');
         console.log("Sesión cerrada");
 
-        // Redirige al usuario a la página de login
-        navigate("/login");
+        // Redirige al usuario a la página de login y reemplaza el historial
+        // para que no pueda volver a la página anterior
+        navigate("/login", { replace: true });
     };
 
     return (
         <nav className="fixed top-0 w-full bg-blue-900 text-white flex items-center justify-between px-5 h-24 z-50">
             {/* Logo de la app */}
-
             <Link to="/Administrador">
                 <img
                     src="/public/img/logo-navbar.jpeg"

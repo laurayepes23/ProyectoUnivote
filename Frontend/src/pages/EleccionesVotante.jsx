@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import CardEleccion from "../components/CardEleccion";
 import NavbarVotante from "../components/NavbarVotante";
+import axios from 'axios'; 
 
 export default function GestionElecciones() {
   const [elecciones, setElecciones] = useState([]);
@@ -9,44 +10,41 @@ export default function GestionElecciones() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Simulación de datos
-    setTimeout(() => {
-      setElecciones([
-        {
-          id: 1,
-          nombre: "Elección de Rector 2025",
-          fecha: "15 de septiembre 2025",
-          estado: "Activa",
-          imagen: "/img/rector.png",
-        },
-        {
-          id: 2,
-          nombre: "Elección de Representante Estudiantil",
-          fecha: "10 de octubre 2025",
-          estado: "Próxima",
-          imagen: "/img/representante.png",
-        },
-        {
-          id: 3,
-          nombre: "Elección de Consejo Académico",
-          fecha: "1 de agosto 2025",
-          estado: "Finalizada",
-          imagen: "/img/consejo.png",
-        },
-      ]);
-      setCargando(false);
-    }, 1000);
+    const fetchElecciones = async () => {
+      try {
+
+        const response = await axios.get('http://localhost:3000/elections');
+        
+        const data = response.data;
+
+        const eleccionesAdaptadas = data.map(eleccion => ({
+          id: eleccion.id_election,
+          nombre: eleccion.nombre_election,
+          fechaInicio: eleccion.fecha_inicio, 
+          fechaFin: eleccion.fecha_fin,       
+          estado: eleccion.estado_election,
+          imagen: "/img/rector.png", 
+        }));
+        
+        setElecciones(eleccionesAdaptadas);
+
+      } catch (error) {
+        console.error("Error al cargar las elecciones:", error);
+      } finally {
+        setCargando(false);
+      }
+    };
+
+    fetchElecciones();
   }, []);
 
   const handleVotar = (id) => {
     navigate(`/CandidatosVotante/${id}`);
   };
 
+  // El resto del componente (el JSX) no necesita cambios
   return (
-
-    
     <div className="min-h-screen bg-gray-50 flex flex-col items-center px-4 py-8">
-
       <NavbarVotante />
       
       <h1 className="text-3xl font-bold text-blue-900 mb-8 mt-24">

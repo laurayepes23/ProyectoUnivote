@@ -36,7 +36,7 @@ const Navbar_admin = () => {
 
         {/* Resultados Elecciones */}
         <li className="cursor-pointer hover:text-blue-300 transition">
-          <Link to="/Resultado_elecciones_adm">Resultados Elecciones</Link>
+          <Link to="/ResultadosVotante">Resultados Elecciones</Link>
         </li>
       </ul>
 

@@ -2,6 +2,7 @@ import { Controller, Get, Post, Body, Patch, Param, Delete, HttpCode, HttpStatus
 import { CreateAdministratorDto } from './dto/create-administrator.dto';
 import { UpdateAdministratorDto } from './dto/update-administrator.dto';
 import { AdministratorsService } from './administrators.servicie';
+import { LoginAdminDto } from './dto/login-admin.dto';
 
 @Controller('administrators')
 export class AdministratorsController {
@@ -11,6 +12,13 @@ export class AdministratorsController {
   @Post()
   create(@Body() newAdministrator: CreateAdministratorDto) {
     return this.administratorsService.create(newAdministrator);
+  }
+
+  // Iniciar sesión del administrador
+  @Post('login')
+  @HttpCode(HttpStatus.OK)
+  login(@Body() loginAdminDto: LoginAdminDto) {
+    return this.administratorsService.login(loginAdminDto.correo_admin, loginAdminDto.contrasena_admin);
   }
 
   // Obtener todos los administradores

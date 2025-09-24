@@ -1,5 +1,5 @@
 // src/votes/votes.service.ts
-import { Injectable } from '@nestjs/common';
+import { Injectable, ConflictException, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { CreateVoteDto } from './dto/create-vote.dto';
 
@@ -8,44 +8,56 @@ export class VotesService {
     constructor(private prisma: PrismaService) { }
 
     async createVote(createVoteDto: CreateVoteDto) {
+        const { voterId, candidateId, electionId } = createVoteDto;
+
         // Verificar que el votante existe
-        const voter = await this.prisma.voter.findUnique({
-            where: { id_voter: createVoteDto.voterId }
-        });
-
+        const voter = await this.prisma.voter.findUnique({ where: { id_voter: voterId } });
         if (!voter) {
-            throw new Error('Votante no encontrado');
+            throw new NotFoundException('Votante no encontrado');
         }
 
-        // Verificar que el candidato existe
-        const candidate = await this.prisma.candidate.findUnique({
-            where: { id_candidate: createVoteDto.candidateId }
+        // Verificar que el candidato existe y pertenece a la elección correcta
+        const candidate = await this.prisma.candidate.findFirst({
+            where: {
+                id_candidate: candidateId,
+                // CORRECCIÓN AQUÍ: Usar la relación 'election' para filtrar
+                election: {
+                    id_election: electionId
+                }
+            }
         });
-
         if (!candidate) {
-            throw new Error('Candidato no encontrado');
+            throw new NotFoundException('Candidato no encontrado o no pertenece a esta elección');
         }
 
-        // Verificar que el votante no haya votado antes
-        const existingVote = await this.prisma.vote.findUnique({
-            where: { voterId: createVoteDto.voterId }
+        // Verificar si el votante ya ha votado en esta elección
+        const existingVote = await this.prisma.vote.findFirst({
+            where: {
+                voterId: voterId,
+                // CORRECCIÓN AQUÍ: Filtrar a través de la relación anidada 'candidate' -> 'election'
+                candidate: {
+                    election: {
+                        id_election: electionId
+                    }
+                }
+            }
         });
 
         if (existingVote) {
-            throw new Error('Este votante ya emitió su voto');
+            throw new ConflictException('Este votante ya emitió su voto en esta elección.');
         }
 
         // Crear el voto
         return this.prisma.vote.create({
             data: {
-                fecha_vote: createVoteDto.fecha_vote,
-                hora_vote: createVoteDto.hora_vote,
-                voterId: createVoteDto.voterId,
-                candidateId: createVoteDto.candidateId
+                fecha_vote: new Date(), // Generado en el servidor
+                hora_vote: new Date(),  // Generado en el servidor
+                voter: { connect: { id_voter: voterId } },
+                candidate: { connect: { id_candidate: candidateId } }
             },
             include: {
-                voter: true,     // Incluir datos del votante
-                candidate: true  // Incluir datos del candidato
+                voter: true,
+                candidate: true
             }
         });
     }

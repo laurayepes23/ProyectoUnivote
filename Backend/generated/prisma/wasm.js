@@ -162,6 +162,9 @@ exports.Prisma.CandidateScalarFieldEnum = {
   correo_candidate: 'correo_candidate',
   estado_candidate: 'estado_candidate',
   foto_candidate: 'foto_candidate',
+  contrasena_candidate: 'contrasena_candidate',
+  roleId: 'roleId',
+  careerId: 'careerId',
   electionId: 'electionId'
 };
 
@@ -170,7 +173,8 @@ exports.Prisma.VoteScalarFieldEnum = {
   fecha_vote: 'fecha_vote',
   hora_vote: 'hora_vote',
   voterId: 'voterId',
-  candidateId: 'candidateId'
+  candidateId: 'candidateId',
+  electionId: 'electionId'
 };
 
 exports.Prisma.ProposalScalarFieldEnum = {

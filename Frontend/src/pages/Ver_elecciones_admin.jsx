@@ -1,19 +1,35 @@
-// src/pages/Ver_elecciones.jsx
 import React, { useState, useEffect } from "react";
 import Navbar_admin from "../components/Navbar_admin";
+import Footer from "../components/Footer";
+import axios from "axios";
+
+// Ajusta esta URL para que apunte a tu endpoint de elecciones en el backend
+const API_BASE_URL = "http://localhost:3000/elections";
 
 const Ver_elecciones = () => {
-    // Aquí simulo elecciones de ejemplo
     const [elecciones, setElecciones] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
+    // Función para obtener las elecciones de la API
+    const fetchElections = async () => {
+        setLoading(true);
+        try {
+            const response = await axios.get(API_BASE_URL);
+            setElecciones(response.data);
+        } catch (err) {
+            console.error("Error al cargar las elecciones:", err);
+            setError("No se pudieron cargar las elecciones.");
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    console.log(elecciones);
+
+    // Carga las elecciones al montar el componente
     useEffect(() => {
-        // Simulación de datos (luego puedes traerlos del backend)
-        const data = [
-            { id: 1, nombre: "Elección Consejo Estudiantil 2025", estado: "Activa" },
-            { id: 2, nombre: "Elección Representante Docente 2024", estado: "Finalizada" },
-            { id: 3, nombre: "Elección Alcaldía Estudiantil", estado: "Pendiente" },
-        ];
-        setElecciones(data);
+        fetchElections();
     }, []);
 
     return (
@@ -27,7 +43,11 @@ const Ver_elecciones = () => {
                     Lista de Elecciones
                 </h1>
 
-                {elecciones.length === 0 ? (
+                {loading ? (
+                    <p className="text-center text-gray-500">Cargando elecciones...</p>
+                ) : error ? (
+                    <p className="text-center text-red-500">{error}</p>
+                ) : elecciones.length === 0 ? (
                     <p className="text-gray-600 text-center">
                         No hay elecciones registradas.
                     </p>
@@ -37,15 +57,31 @@ const Ver_elecciones = () => {
                             <tr>
                                 <th className="p-3 border text-center">ID</th>
                                 <th className="p-3 border text-center">Nombre</th>
+                                <th className="p-3 border text-center">Fecha de Inicio</th>
+                                <th className="p-3 border text-center">Fecha de Fin</th>
                                 <th className="p-3 border text-center">Estado</th>
                             </tr>
                         </thead>
                         <tbody>
                             {elecciones.map((eleccion) => (
-                                <tr key={eleccion.id} className="hover:bg-gray-100 text-center">
-                                    <td className="p-3 border">{eleccion.id}</td>
-                                    <td className="p-3 border">{eleccion.nombre}</td>
-                                    <td className="p-3 border">{eleccion.estado}</td>
+                                <tr key={eleccion.id_election} className="hover:bg-gray-100 text-center">
+                                    <td className="p-3 border">{eleccion.id_election}</td>
+                                    <td className="p-3 border">{eleccion.nombre_election}</td>
+                                    <td className="p-3 border">
+                                        {eleccion.fecha_inicio}
+                                    </td>
+                                    <td className="p-3 border">
+                                        {eleccion.fecha_fin}
+                                    </td>
+                                    <td
+                                        className={`p-3 border font-semibold ${
+                                            eleccion.estado_election === "Pendiente"
+                                                ? "text-yellow-600"
+                                                : "text-green-600"
+                                        }`}
+                                    >
+                                        {eleccion.estado_election}
+                                    </td>
                                 </tr>
                             ))}
                         </tbody>

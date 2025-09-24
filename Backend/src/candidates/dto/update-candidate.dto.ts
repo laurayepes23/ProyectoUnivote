@@ -1,4 +1,13 @@
-import { PartialType } from '@nestjs/mapped-types';
-import { CreateCandidateDto } from './create-candidate.dto';
+import { IsString, IsOptional, IsIn } from 'class-validator';
 
-export class UpdateCandidateDto extends PartialType(CreateCandidateDto) {}
+export class UpdateCandidateDto {
+  @IsString()
+  @IsOptional()
+  @IsIn(['Aprobado', 'No Aprobado', 'Pendiente']) // Solo permite estos valores
+  estado_candidate?: string;
+
+  // Si en el futuro quieres actualizar otros campos, los puedes añadir aquí.
+  // @IsString()
+  // @IsOptional()
+  // nombre_candidate?: string;
+}

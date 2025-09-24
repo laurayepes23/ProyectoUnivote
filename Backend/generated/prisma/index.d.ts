@@ -1611,17 +1611,50 @@ export namespace Prisma {
 
 
   /**
+   * Count Type VoterCountOutputType
+   */
+
+  export type VoterCountOutputType = {
+    vote: number
+  }
+
+  export type VoterCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    vote?: boolean | VoterCountOutputTypeCountVoteArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * VoterCountOutputType without action
+   */
+  export type VoterCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the VoterCountOutputType
+     */
+    select?: VoterCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * VoterCountOutputType without action
+   */
+  export type VoterCountOutputTypeCountVoteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: VoteWhereInput
+  }
+
+
+  /**
    * Count Type ElectionCountOutputType
    */
 
   export type ElectionCountOutputType = {
     candidates: number
     voters: number
+    Vote: number
   }
 
   export type ElectionCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     candidates?: boolean | ElectionCountOutputTypeCountCandidatesArgs
     voters?: boolean | ElectionCountOutputTypeCountVotersArgs
+    Vote?: boolean | ElectionCountOutputTypeCountVoteArgs
   }
 
   // Custom InputTypes
@@ -1647,6 +1680,13 @@ export namespace Prisma {
    */
   export type ElectionCountOutputTypeCountVotersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: VoterWhereInput
+  }
+
+  /**
+   * ElectionCountOutputType without action
+   */
+  export type ElectionCountOutputTypeCountVoteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: VoteWhereInput
   }
 
 
@@ -1696,10 +1736,12 @@ export namespace Prisma {
 
   export type CareerCountOutputType = {
     voters: number
+    candidates: number
   }
 
   export type CareerCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     voters?: boolean | CareerCountOutputTypeCountVotersArgs
+    candidates?: boolean | CareerCountOutputTypeCountCandidatesArgs
   }
 
   // Custom InputTypes
@@ -1720,6 +1762,13 @@ export namespace Prisma {
     where?: VoterWhereInput
   }
 
+  /**
+   * CareerCountOutputType without action
+   */
+  export type CareerCountOutputTypeCountCandidatesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CandidateWhereInput
+  }
+
 
   /**
    * Count Type RoleCountOutputType
@@ -1727,10 +1776,12 @@ export namespace Prisma {
 
   export type RoleCountOutputType = {
     voters: number
+    candidates: number
   }
 
   export type RoleCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     voters?: boolean | RoleCountOutputTypeCountVotersArgs
+    candidates?: boolean | RoleCountOutputTypeCountCandidatesArgs
   }
 
   // Custom InputTypes
@@ -1749,6 +1800,13 @@ export namespace Prisma {
    */
   export type RoleCountOutputTypeCountVotersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: VoterWhereInput
+  }
+
+  /**
+   * RoleCountOutputType without action
+   */
+  export type RoleCountOutputTypeCountCandidatesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CandidateWhereInput
   }
 
 
@@ -3117,7 +3175,7 @@ export namespace Prisma {
     estado_voter: string
     contrasena_voter: string
     roleId: number
-    electionId: number
+    electionId: number | null
     careerId: number
     _count: VoterCountAggregateOutputType | null
     _avg: VoterAvgAggregateOutputType | null
@@ -3153,9 +3211,10 @@ export namespace Prisma {
     electionId?: boolean
     careerId?: boolean
     role?: boolean | RoleDefaultArgs<ExtArgs>
-    election?: boolean | ElectionDefaultArgs<ExtArgs>
+    election?: boolean | Voter$electionArgs<ExtArgs>
     career?: boolean | CareerDefaultArgs<ExtArgs>
     vote?: boolean | Voter$voteArgs<ExtArgs>
+    _count?: boolean | VoterCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["voter"]>
 
   export type VoterSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -3171,7 +3230,7 @@ export namespace Prisma {
     electionId?: boolean
     careerId?: boolean
     role?: boolean | RoleDefaultArgs<ExtArgs>
-    election?: boolean | ElectionDefaultArgs<ExtArgs>
+    election?: boolean | Voter$electionArgs<ExtArgs>
     career?: boolean | CareerDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["voter"]>
 
@@ -3188,7 +3247,7 @@ export namespace Prisma {
     electionId?: boolean
     careerId?: boolean
     role?: boolean | RoleDefaultArgs<ExtArgs>
-    election?: boolean | ElectionDefaultArgs<ExtArgs>
+    election?: boolean | Voter$electionArgs<ExtArgs>
     career?: boolean | CareerDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["voter"]>
 
@@ -3209,18 +3268,19 @@ export namespace Prisma {
   export type VoterOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id_voter" | "nombre_voter" | "apellido_voter" | "tipo_doc_voter" | "num_doc_voter" | "correo_voter" | "estado_voter" | "contrasena_voter" | "roleId" | "electionId" | "careerId", ExtArgs["result"]["voter"]>
   export type VoterInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     role?: boolean | RoleDefaultArgs<ExtArgs>
-    election?: boolean | ElectionDefaultArgs<ExtArgs>
+    election?: boolean | Voter$electionArgs<ExtArgs>
     career?: boolean | CareerDefaultArgs<ExtArgs>
     vote?: boolean | Voter$voteArgs<ExtArgs>
+    _count?: boolean | VoterCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type VoterIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     role?: boolean | RoleDefaultArgs<ExtArgs>
-    election?: boolean | ElectionDefaultArgs<ExtArgs>
+    election?: boolean | Voter$electionArgs<ExtArgs>
     career?: boolean | CareerDefaultArgs<ExtArgs>
   }
   export type VoterIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     role?: boolean | RoleDefaultArgs<ExtArgs>
-    election?: boolean | ElectionDefaultArgs<ExtArgs>
+    election?: boolean | Voter$electionArgs<ExtArgs>
     career?: boolean | CareerDefaultArgs<ExtArgs>
   }
 
@@ -3228,9 +3288,9 @@ export namespace Prisma {
     name: "Voter"
     objects: {
       role: Prisma.$RolePayload<ExtArgs>
-      election: Prisma.$ElectionPayload<ExtArgs>
+      election: Prisma.$ElectionPayload<ExtArgs> | null
       career: Prisma.$CareerPayload<ExtArgs>
-      vote: Prisma.$VotePayload<ExtArgs> | null
+      vote: Prisma.$VotePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id_voter: number
@@ -3242,7 +3302,7 @@ export namespace Prisma {
       estado_voter: string
       contrasena_voter: string
       roleId: number
-      electionId: number
+      electionId: number | null
       careerId: number
     }, ExtArgs["result"]["voter"]>
     composites: {}
@@ -3639,9 +3699,9 @@ export namespace Prisma {
   export interface Prisma__VoterClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     role<T extends RoleDefaultArgs<ExtArgs> = {}>(args?: Subset<T, RoleDefaultArgs<ExtArgs>>): Prisma__RoleClient<$Result.GetResult<Prisma.$RolePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    election<T extends ElectionDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ElectionDefaultArgs<ExtArgs>>): Prisma__ElectionClient<$Result.GetResult<Prisma.$ElectionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    election<T extends Voter$electionArgs<ExtArgs> = {}>(args?: Subset<T, Voter$electionArgs<ExtArgs>>): Prisma__ElectionClient<$Result.GetResult<Prisma.$ElectionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     career<T extends CareerDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CareerDefaultArgs<ExtArgs>>): Prisma__CareerClient<$Result.GetResult<Prisma.$CareerPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    vote<T extends Voter$voteArgs<ExtArgs> = {}>(args?: Subset<T, Voter$voteArgs<ExtArgs>>): Prisma__VoteClient<$Result.GetResult<Prisma.$VotePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    vote<T extends Voter$voteArgs<ExtArgs> = {}>(args?: Subset<T, Voter$voteArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$VotePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -4078,6 +4138,25 @@ export namespace Prisma {
   }
 
   /**
+   * Voter.election
+   */
+  export type Voter$electionArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Election
+     */
+    select?: ElectionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Election
+     */
+    omit?: ElectionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ElectionInclude<ExtArgs> | null
+    where?: ElectionWhereInput
+  }
+
+  /**
    * Voter.vote
    */
   export type Voter$voteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -4094,6 +4173,11 @@ export namespace Prisma {
      */
     include?: VoteInclude<ExtArgs> | null
     where?: VoteWhereInput
+    orderBy?: VoteOrderByWithRelationInput | VoteOrderByWithRelationInput[]
+    cursor?: VoteWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: VoteScalarFieldEnum | VoteScalarFieldEnum[]
   }
 
   /**
@@ -4329,6 +4413,7 @@ export namespace Prisma {
     candidates?: boolean | Election$candidatesArgs<ExtArgs>
     voters?: boolean | Election$votersArgs<ExtArgs>
     result?: boolean | Election$resultArgs<ExtArgs>
+    Vote?: boolean | Election$VoteArgs<ExtArgs>
     _count?: boolean | ElectionCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["election"]>
 
@@ -4367,6 +4452,7 @@ export namespace Prisma {
     candidates?: boolean | Election$candidatesArgs<ExtArgs>
     voters?: boolean | Election$votersArgs<ExtArgs>
     result?: boolean | Election$resultArgs<ExtArgs>
+    Vote?: boolean | Election$VoteArgs<ExtArgs>
     _count?: boolean | ElectionCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type ElectionIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -4383,6 +4469,7 @@ export namespace Prisma {
       candidates: Prisma.$CandidatePayload<ExtArgs>[]
       voters: Prisma.$VoterPayload<ExtArgs>[]
       result: Prisma.$ResultPayload<ExtArgs> | null
+      Vote: Prisma.$VotePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id_election: number
@@ -4789,6 +4876,7 @@ export namespace Prisma {
     candidates<T extends Election$candidatesArgs<ExtArgs> = {}>(args?: Subset<T, Election$candidatesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CandidatePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     voters<T extends Election$votersArgs<ExtArgs> = {}>(args?: Subset<T, Election$votersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$VoterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     result<T extends Election$resultArgs<ExtArgs> = {}>(args?: Subset<T, Election$resultArgs<ExtArgs>>): Prisma__ResultClient<$Result.GetResult<Prisma.$ResultPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    Vote<T extends Election$VoteArgs<ExtArgs> = {}>(args?: Subset<T, Election$VoteArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$VotePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -5287,6 +5375,30 @@ export namespace Prisma {
   }
 
   /**
+   * Election.Vote
+   */
+  export type Election$VoteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Vote
+     */
+    select?: VoteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Vote
+     */
+    omit?: VoteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VoteInclude<ExtArgs> | null
+    where?: VoteWhereInput
+    orderBy?: VoteOrderByWithRelationInput | VoteOrderByWithRelationInput[]
+    cursor?: VoteWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: VoteScalarFieldEnum | VoteScalarFieldEnum[]
+  }
+
+  /**
    * Election without action
    */
   export type ElectionDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -5320,12 +5432,16 @@ export namespace Prisma {
   export type CandidateAvgAggregateOutputType = {
     id_candidate: number | null
     num_doc_candidate: number | null
+    roleId: number | null
+    careerId: number | null
     electionId: number | null
   }
 
   export type CandidateSumAggregateOutputType = {
     id_candidate: number | null
     num_doc_candidate: bigint | null
+    roleId: number | null
+    careerId: number | null
     electionId: number | null
   }
 
@@ -5338,6 +5454,9 @@ export namespace Prisma {
     correo_candidate: string | null
     estado_candidate: string | null
     foto_candidate: string | null
+    contrasena_candidate: string | null
+    roleId: number | null
+    careerId: number | null
     electionId: number | null
   }
 
@@ -5350,6 +5469,9 @@ export namespace Prisma {
     correo_candidate: string | null
     estado_candidate: string | null
     foto_candidate: string | null
+    contrasena_candidate: string | null
+    roleId: number | null
+    careerId: number | null
     electionId: number | null
   }
 
@@ -5362,6 +5484,9 @@ export namespace Prisma {
     correo_candidate: number
     estado_candidate: number
     foto_candidate: number
+    contrasena_candidate: number
+    roleId: number
+    careerId: number
     electionId: number
     _all: number
   }
@@ -5370,12 +5495,16 @@ export namespace Prisma {
   export type CandidateAvgAggregateInputType = {
     id_candidate?: true
     num_doc_candidate?: true
+    roleId?: true
+    careerId?: true
     electionId?: true
   }
 
   export type CandidateSumAggregateInputType = {
     id_candidate?: true
     num_doc_candidate?: true
+    roleId?: true
+    careerId?: true
     electionId?: true
   }
 
@@ -5388,6 +5517,9 @@ export namespace Prisma {
     correo_candidate?: true
     estado_candidate?: true
     foto_candidate?: true
+    contrasena_candidate?: true
+    roleId?: true
+    careerId?: true
     electionId?: true
   }
 
@@ -5400,6 +5532,9 @@ export namespace Prisma {
     correo_candidate?: true
     estado_candidate?: true
     foto_candidate?: true
+    contrasena_candidate?: true
+    roleId?: true
+    careerId?: true
     electionId?: true
   }
 
@@ -5412,6 +5547,9 @@ export namespace Prisma {
     correo_candidate?: true
     estado_candidate?: true
     foto_candidate?: true
+    contrasena_candidate?: true
+    roleId?: true
+    careerId?: true
     electionId?: true
     _all?: true
   }
@@ -5510,8 +5648,11 @@ export namespace Prisma {
     num_doc_candidate: bigint
     correo_candidate: string
     estado_candidate: string
-    foto_candidate: string
-    electionId: number
+    foto_candidate: string | null
+    contrasena_candidate: string
+    roleId: number
+    careerId: number
+    electionId: number | null
     _count: CandidateCountAggregateOutputType | null
     _avg: CandidateAvgAggregateOutputType | null
     _sum: CandidateSumAggregateOutputType | null
@@ -5542,8 +5683,13 @@ export namespace Prisma {
     correo_candidate?: boolean
     estado_candidate?: boolean
     foto_candidate?: boolean
+    contrasena_candidate?: boolean
+    roleId?: boolean
+    careerId?: boolean
     electionId?: boolean
-    election?: boolean | ElectionDefaultArgs<ExtArgs>
+    role?: boolean | RoleDefaultArgs<ExtArgs>
+    career?: boolean | CareerDefaultArgs<ExtArgs>
+    election?: boolean | Candidate$electionArgs<ExtArgs>
     proposals?: boolean | Candidate$proposalsArgs<ExtArgs>
     result?: boolean | Candidate$resultArgs<ExtArgs>
     votes?: boolean | Candidate$votesArgs<ExtArgs>
@@ -5559,8 +5705,13 @@ export namespace Prisma {
     correo_candidate?: boolean
     estado_candidate?: boolean
     foto_candidate?: boolean
+    contrasena_candidate?: boolean
+    roleId?: boolean
+    careerId?: boolean
     electionId?: boolean
-    election?: boolean | ElectionDefaultArgs<ExtArgs>
+    role?: boolean | RoleDefaultArgs<ExtArgs>
+    career?: boolean | CareerDefaultArgs<ExtArgs>
+    election?: boolean | Candidate$electionArgs<ExtArgs>
   }, ExtArgs["result"]["candidate"]>
 
   export type CandidateSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -5572,8 +5723,13 @@ export namespace Prisma {
     correo_candidate?: boolean
     estado_candidate?: boolean
     foto_candidate?: boolean
+    contrasena_candidate?: boolean
+    roleId?: boolean
+    careerId?: boolean
     electionId?: boolean
-    election?: boolean | ElectionDefaultArgs<ExtArgs>
+    role?: boolean | RoleDefaultArgs<ExtArgs>
+    career?: boolean | CareerDefaultArgs<ExtArgs>
+    election?: boolean | Candidate$electionArgs<ExtArgs>
   }, ExtArgs["result"]["candidate"]>
 
   export type CandidateSelectScalar = {
@@ -5585,28 +5741,39 @@ export namespace Prisma {
     correo_candidate?: boolean
     estado_candidate?: boolean
     foto_candidate?: boolean
+    contrasena_candidate?: boolean
+    roleId?: boolean
+    careerId?: boolean
     electionId?: boolean
   }
 
-  export type CandidateOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id_candidate" | "nombre_candidate" | "apellido_candidate" | "tipo_doc_candidate" | "num_doc_candidate" | "correo_candidate" | "estado_candidate" | "foto_candidate" | "electionId", ExtArgs["result"]["candidate"]>
+  export type CandidateOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id_candidate" | "nombre_candidate" | "apellido_candidate" | "tipo_doc_candidate" | "num_doc_candidate" | "correo_candidate" | "estado_candidate" | "foto_candidate" | "contrasena_candidate" | "roleId" | "careerId" | "electionId", ExtArgs["result"]["candidate"]>
   export type CandidateInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    election?: boolean | ElectionDefaultArgs<ExtArgs>
+    role?: boolean | RoleDefaultArgs<ExtArgs>
+    career?: boolean | CareerDefaultArgs<ExtArgs>
+    election?: boolean | Candidate$electionArgs<ExtArgs>
     proposals?: boolean | Candidate$proposalsArgs<ExtArgs>
     result?: boolean | Candidate$resultArgs<ExtArgs>
     votes?: boolean | Candidate$votesArgs<ExtArgs>
     _count?: boolean | CandidateCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type CandidateIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    election?: boolean | ElectionDefaultArgs<ExtArgs>
+    role?: boolean | RoleDefaultArgs<ExtArgs>
+    career?: boolean | CareerDefaultArgs<ExtArgs>
+    election?: boolean | Candidate$electionArgs<ExtArgs>
   }
   export type CandidateIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    election?: boolean | ElectionDefaultArgs<ExtArgs>
+    role?: boolean | RoleDefaultArgs<ExtArgs>
+    career?: boolean | CareerDefaultArgs<ExtArgs>
+    election?: boolean | Candidate$electionArgs<ExtArgs>
   }
 
   export type $CandidatePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Candidate"
     objects: {
-      election: Prisma.$ElectionPayload<ExtArgs>
+      role: Prisma.$RolePayload<ExtArgs>
+      career: Prisma.$CareerPayload<ExtArgs>
+      election: Prisma.$ElectionPayload<ExtArgs> | null
       proposals: Prisma.$ProposalPayload<ExtArgs>[]
       result: Prisma.$ResultPayload<ExtArgs> | null
       votes: Prisma.$VotePayload<ExtArgs>[]
@@ -5619,8 +5786,11 @@ export namespace Prisma {
       num_doc_candidate: bigint
       correo_candidate: string
       estado_candidate: string
-      foto_candidate: string
-      electionId: number
+      foto_candidate: string | null
+      contrasena_candidate: string
+      roleId: number
+      careerId: number
+      electionId: number | null
     }, ExtArgs["result"]["candidate"]>
     composites: {}
   }
@@ -6015,7 +6185,9 @@ export namespace Prisma {
    */
   export interface Prisma__CandidateClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    election<T extends ElectionDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ElectionDefaultArgs<ExtArgs>>): Prisma__ElectionClient<$Result.GetResult<Prisma.$ElectionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    role<T extends RoleDefaultArgs<ExtArgs> = {}>(args?: Subset<T, RoleDefaultArgs<ExtArgs>>): Prisma__RoleClient<$Result.GetResult<Prisma.$RolePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    career<T extends CareerDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CareerDefaultArgs<ExtArgs>>): Prisma__CareerClient<$Result.GetResult<Prisma.$CareerPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    election<T extends Candidate$electionArgs<ExtArgs> = {}>(args?: Subset<T, Candidate$electionArgs<ExtArgs>>): Prisma__ElectionClient<$Result.GetResult<Prisma.$ElectionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     proposals<T extends Candidate$proposalsArgs<ExtArgs> = {}>(args?: Subset<T, Candidate$proposalsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProposalPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     result<T extends Candidate$resultArgs<ExtArgs> = {}>(args?: Subset<T, Candidate$resultArgs<ExtArgs>>): Prisma__ResultClient<$Result.GetResult<Prisma.$ResultPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     votes<T extends Candidate$votesArgs<ExtArgs> = {}>(args?: Subset<T, Candidate$votesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$VotePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -6056,6 +6228,9 @@ export namespace Prisma {
     readonly correo_candidate: FieldRef<"Candidate", 'String'>
     readonly estado_candidate: FieldRef<"Candidate", 'String'>
     readonly foto_candidate: FieldRef<"Candidate", 'String'>
+    readonly contrasena_candidate: FieldRef<"Candidate", 'String'>
+    readonly roleId: FieldRef<"Candidate", 'Int'>
+    readonly careerId: FieldRef<"Candidate", 'Int'>
     readonly electionId: FieldRef<"Candidate", 'Int'>
   }
     
@@ -6453,6 +6628,25 @@ export namespace Prisma {
   }
 
   /**
+   * Candidate.election
+   */
+  export type Candidate$electionArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Election
+     */
+    select?: ElectionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Election
+     */
+    omit?: ElectionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ElectionInclude<ExtArgs> | null
+    where?: ElectionWhereInput
+  }
+
+  /**
    * Candidate.proposals
    */
   export type Candidate$proposalsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -6554,12 +6748,14 @@ export namespace Prisma {
     id_vote: number | null
     voterId: number | null
     candidateId: number | null
+    electionId: number | null
   }
 
   export type VoteSumAggregateOutputType = {
     id_vote: number | null
     voterId: number | null
     candidateId: number | null
+    electionId: number | null
   }
 
   export type VoteMinAggregateOutputType = {
@@ -6568,6 +6764,7 @@ export namespace Prisma {
     hora_vote: Date | null
     voterId: number | null
     candidateId: number | null
+    electionId: number | null
   }
 
   export type VoteMaxAggregateOutputType = {
@@ -6576,6 +6773,7 @@ export namespace Prisma {
     hora_vote: Date | null
     voterId: number | null
     candidateId: number | null
+    electionId: number | null
   }
 
   export type VoteCountAggregateOutputType = {
@@ -6584,6 +6782,7 @@ export namespace Prisma {
     hora_vote: number
     voterId: number
     candidateId: number
+    electionId: number
     _all: number
   }
 
@@ -6592,12 +6791,14 @@ export namespace Prisma {
     id_vote?: true
     voterId?: true
     candidateId?: true
+    electionId?: true
   }
 
   export type VoteSumAggregateInputType = {
     id_vote?: true
     voterId?: true
     candidateId?: true
+    electionId?: true
   }
 
   export type VoteMinAggregateInputType = {
@@ -6606,6 +6807,7 @@ export namespace Prisma {
     hora_vote?: true
     voterId?: true
     candidateId?: true
+    electionId?: true
   }
 
   export type VoteMaxAggregateInputType = {
@@ -6614,6 +6816,7 @@ export namespace Prisma {
     hora_vote?: true
     voterId?: true
     candidateId?: true
+    electionId?: true
   }
 
   export type VoteCountAggregateInputType = {
@@ -6622,6 +6825,7 @@ export namespace Prisma {
     hora_vote?: true
     voterId?: true
     candidateId?: true
+    electionId?: true
     _all?: true
   }
 
@@ -6717,6 +6921,7 @@ export namespace Prisma {
     hora_vote: Date
     voterId: number
     candidateId: number | null
+    electionId: number | null
     _count: VoteCountAggregateOutputType | null
     _avg: VoteAvgAggregateOutputType | null
     _sum: VoteSumAggregateOutputType | null
@@ -6744,8 +6949,10 @@ export namespace Prisma {
     hora_vote?: boolean
     voterId?: boolean
     candidateId?: boolean
+    electionId?: boolean
     voter?: boolean | VoterDefaultArgs<ExtArgs>
     candidate?: boolean | Vote$candidateArgs<ExtArgs>
+    election?: boolean | Vote$electionArgs<ExtArgs>
   }, ExtArgs["result"]["vote"]>
 
   export type VoteSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -6754,8 +6961,10 @@ export namespace Prisma {
     hora_vote?: boolean
     voterId?: boolean
     candidateId?: boolean
+    electionId?: boolean
     voter?: boolean | VoterDefaultArgs<ExtArgs>
     candidate?: boolean | Vote$candidateArgs<ExtArgs>
+    election?: boolean | Vote$electionArgs<ExtArgs>
   }, ExtArgs["result"]["vote"]>
 
   export type VoteSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -6764,8 +6973,10 @@ export namespace Prisma {
     hora_vote?: boolean
     voterId?: boolean
     candidateId?: boolean
+    electionId?: boolean
     voter?: boolean | VoterDefaultArgs<ExtArgs>
     candidate?: boolean | Vote$candidateArgs<ExtArgs>
+    election?: boolean | Vote$electionArgs<ExtArgs>
   }, ExtArgs["result"]["vote"]>
 
   export type VoteSelectScalar = {
@@ -6774,20 +6985,24 @@ export namespace Prisma {
     hora_vote?: boolean
     voterId?: boolean
     candidateId?: boolean
+    electionId?: boolean
   }
 
-  export type VoteOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id_vote" | "fecha_vote" | "hora_vote" | "voterId" | "candidateId", ExtArgs["result"]["vote"]>
+  export type VoteOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id_vote" | "fecha_vote" | "hora_vote" | "voterId" | "candidateId" | "electionId", ExtArgs["result"]["vote"]>
   export type VoteInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     voter?: boolean | VoterDefaultArgs<ExtArgs>
     candidate?: boolean | Vote$candidateArgs<ExtArgs>
+    election?: boolean | Vote$electionArgs<ExtArgs>
   }
   export type VoteIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     voter?: boolean | VoterDefaultArgs<ExtArgs>
     candidate?: boolean | Vote$candidateArgs<ExtArgs>
+    election?: boolean | Vote$electionArgs<ExtArgs>
   }
   export type VoteIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     voter?: boolean | VoterDefaultArgs<ExtArgs>
     candidate?: boolean | Vote$candidateArgs<ExtArgs>
+    election?: boolean | Vote$electionArgs<ExtArgs>
   }
 
   export type $VotePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -6795,6 +7010,7 @@ export namespace Prisma {
     objects: {
       voter: Prisma.$VoterPayload<ExtArgs>
       candidate: Prisma.$CandidatePayload<ExtArgs> | null
+      election: Prisma.$ElectionPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id_vote: number
@@ -6802,6 +7018,7 @@ export namespace Prisma {
       hora_vote: Date
       voterId: number
       candidateId: number | null
+      electionId: number | null
     }, ExtArgs["result"]["vote"]>
     composites: {}
   }
@@ -7198,6 +7415,7 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     voter<T extends VoterDefaultArgs<ExtArgs> = {}>(args?: Subset<T, VoterDefaultArgs<ExtArgs>>): Prisma__VoterClient<$Result.GetResult<Prisma.$VoterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     candidate<T extends Vote$candidateArgs<ExtArgs> = {}>(args?: Subset<T, Vote$candidateArgs<ExtArgs>>): Prisma__CandidateClient<$Result.GetResult<Prisma.$CandidatePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    election<T extends Vote$electionArgs<ExtArgs> = {}>(args?: Subset<T, Vote$electionArgs<ExtArgs>>): Prisma__ElectionClient<$Result.GetResult<Prisma.$ElectionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -7232,6 +7450,7 @@ export namespace Prisma {
     readonly hora_vote: FieldRef<"Vote", 'DateTime'>
     readonly voterId: FieldRef<"Vote", 'Int'>
     readonly candidateId: FieldRef<"Vote", 'Int'>
+    readonly electionId: FieldRef<"Vote", 'Int'>
   }
     
 
@@ -7644,6 +7863,25 @@ export namespace Prisma {
      */
     include?: CandidateInclude<ExtArgs> | null
     where?: CandidateWhereInput
+  }
+
+  /**
+   * Vote.election
+   */
+  export type Vote$electionArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Election
+     */
+    select?: ElectionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Election
+     */
+    omit?: ElectionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ElectionInclude<ExtArgs> | null
+    where?: ElectionWhereInput
   }
 
   /**
@@ -8944,6 +9182,7 @@ export namespace Prisma {
     nombre_career?: boolean
     facultad_career?: boolean
     voters?: boolean | Career$votersArgs<ExtArgs>
+    candidates?: boolean | Career$candidatesArgs<ExtArgs>
     _count?: boolean | CareerCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["career"]>
 
@@ -8968,6 +9207,7 @@ export namespace Prisma {
   export type CareerOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id_career" | "nombre_career" | "facultad_career", ExtArgs["result"]["career"]>
   export type CareerInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     voters?: boolean | Career$votersArgs<ExtArgs>
+    candidates?: boolean | Career$candidatesArgs<ExtArgs>
     _count?: boolean | CareerCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type CareerIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -8977,6 +9217,7 @@ export namespace Prisma {
     name: "Career"
     objects: {
       voters: Prisma.$VoterPayload<ExtArgs>[]
+      candidates: Prisma.$CandidatePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id_career: number
@@ -9377,6 +9618,7 @@ export namespace Prisma {
   export interface Prisma__CareerClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     voters<T extends Career$votersArgs<ExtArgs> = {}>(args?: Subset<T, Career$votersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$VoterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    candidates<T extends Career$candidatesArgs<ExtArgs> = {}>(args?: Subset<T, Career$candidatesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CandidatePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -9818,6 +10060,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: VoterScalarFieldEnum | VoterScalarFieldEnum[]
+  }
+
+  /**
+   * Career.candidates
+   */
+  export type Career$candidatesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Candidate
+     */
+    select?: CandidateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Candidate
+     */
+    omit?: CandidateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CandidateInclude<ExtArgs> | null
+    where?: CandidateWhereInput
+    orderBy?: CandidateOrderByWithRelationInput | CandidateOrderByWithRelationInput[]
+    cursor?: CandidateWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: CandidateScalarFieldEnum | CandidateScalarFieldEnum[]
   }
 
   /**
@@ -11113,6 +11379,7 @@ export namespace Prisma {
     id_role?: boolean
     nombre_role?: boolean
     voters?: boolean | Role$votersArgs<ExtArgs>
+    candidates?: boolean | Role$candidatesArgs<ExtArgs>
     _count?: boolean | RoleCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["role"]>
 
@@ -11134,6 +11401,7 @@ export namespace Prisma {
   export type RoleOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id_role" | "nombre_role", ExtArgs["result"]["role"]>
   export type RoleInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     voters?: boolean | Role$votersArgs<ExtArgs>
+    candidates?: boolean | Role$candidatesArgs<ExtArgs>
     _count?: boolean | RoleCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type RoleIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -11143,6 +11411,7 @@ export namespace Prisma {
     name: "Role"
     objects: {
       voters: Prisma.$VoterPayload<ExtArgs>[]
+      candidates: Prisma.$CandidatePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id_role: number
@@ -11542,6 +11811,7 @@ export namespace Prisma {
   export interface Prisma__RoleClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     voters<T extends Role$votersArgs<ExtArgs> = {}>(args?: Subset<T, Role$votersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$VoterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    candidates<T extends Role$candidatesArgs<ExtArgs> = {}>(args?: Subset<T, Role$candidatesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CandidatePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -11985,6 +12255,30 @@ export namespace Prisma {
   }
 
   /**
+   * Role.candidates
+   */
+  export type Role$candidatesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Candidate
+     */
+    select?: CandidateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Candidate
+     */
+    omit?: CandidateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CandidateInclude<ExtArgs> | null
+    where?: CandidateWhereInput
+    orderBy?: CandidateOrderByWithRelationInput | CandidateOrderByWithRelationInput[]
+    cursor?: CandidateWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: CandidateScalarFieldEnum | CandidateScalarFieldEnum[]
+  }
+
+  /**
    * Role without action
    */
   export type RoleDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -12068,6 +12362,9 @@ export namespace Prisma {
     correo_candidate: 'correo_candidate',
     estado_candidate: 'estado_candidate',
     foto_candidate: 'foto_candidate',
+    contrasena_candidate: 'contrasena_candidate',
+    roleId: 'roleId',
+    careerId: 'careerId',
     electionId: 'electionId'
   };
 
@@ -12079,7 +12376,8 @@ export namespace Prisma {
     fecha_vote: 'fecha_vote',
     hora_vote: 'hora_vote',
     voterId: 'voterId',
-    candidateId: 'candidateId'
+    candidateId: 'candidateId',
+    electionId: 'electionId'
   };
 
   export type VoteScalarFieldEnum = (typeof VoteScalarFieldEnum)[keyof typeof VoteScalarFieldEnum]
@@ -12252,6 +12550,7 @@ export namespace Prisma {
 
   export type AdministradorWhereUniqueInput = Prisma.AtLeast<{
     id_admin?: number
+    correo_admin?: string
     AND?: AdministradorWhereInput | AdministradorWhereInput[]
     OR?: AdministradorWhereInput[]
     NOT?: AdministradorWhereInput | AdministradorWhereInput[]
@@ -12259,10 +12558,9 @@ export namespace Prisma {
     apellido_admin?: StringFilter<"Administrador"> | string
     tipo_doc_admin?: StringFilter<"Administrador"> | string
     num_doc_admin?: BigIntFilter<"Administrador"> | bigint | number
-    correo_admin?: StringFilter<"Administrador"> | string
     contrasena_admin?: StringFilter<"Administrador"> | string
     elections?: ElectionListRelationFilter
-  }, "id_admin">
+  }, "id_admin" | "correo_admin">
 
   export type AdministradorOrderByWithAggregationInput = {
     id_admin?: SortOrder
@@ -12305,12 +12603,12 @@ export namespace Prisma {
     estado_voter?: StringFilter<"Voter"> | string
     contrasena_voter?: StringFilter<"Voter"> | string
     roleId?: IntFilter<"Voter"> | number
-    electionId?: IntFilter<"Voter"> | number
+    electionId?: IntNullableFilter<"Voter"> | number | null
     careerId?: IntFilter<"Voter"> | number
     role?: XOR<RoleScalarRelationFilter, RoleWhereInput>
-    election?: XOR<ElectionScalarRelationFilter, ElectionWhereInput>
+    election?: XOR<ElectionNullableScalarRelationFilter, ElectionWhereInput> | null
     career?: XOR<CareerScalarRelationFilter, CareerWhereInput>
-    vote?: XOR<VoteNullableScalarRelationFilter, VoteWhereInput> | null
+    vote?: VoteListRelationFilter
   }
 
   export type VoterOrderByWithRelationInput = {
@@ -12323,12 +12621,12 @@ export namespace Prisma {
     estado_voter?: SortOrder
     contrasena_voter?: SortOrder
     roleId?: SortOrder
-    electionId?: SortOrder
+    electionId?: SortOrderInput | SortOrder
     careerId?: SortOrder
     role?: RoleOrderByWithRelationInput
     election?: ElectionOrderByWithRelationInput
     career?: CareerOrderByWithRelationInput
-    vote?: VoteOrderByWithRelationInput
+    vote?: VoteOrderByRelationAggregateInput
   }
 
   export type VoterWhereUniqueInput = Prisma.AtLeast<{
@@ -12344,12 +12642,12 @@ export namespace Prisma {
     estado_voter?: StringFilter<"Voter"> | string
     contrasena_voter?: StringFilter<"Voter"> | string
     roleId?: IntFilter<"Voter"> | number
-    electionId?: IntFilter<"Voter"> | number
+    electionId?: IntNullableFilter<"Voter"> | number | null
     careerId?: IntFilter<"Voter"> | number
     role?: XOR<RoleScalarRelationFilter, RoleWhereInput>
-    election?: XOR<ElectionScalarRelationFilter, ElectionWhereInput>
+    election?: XOR<ElectionNullableScalarRelationFilter, ElectionWhereInput> | null
     career?: XOR<CareerScalarRelationFilter, CareerWhereInput>
-    vote?: XOR<VoteNullableScalarRelationFilter, VoteWhereInput> | null
+    vote?: VoteListRelationFilter
   }, "id_voter" | "num_doc_voter" | "correo_voter">
 
   export type VoterOrderByWithAggregationInput = {
@@ -12362,7 +12660,7 @@ export namespace Prisma {
     estado_voter?: SortOrder
     contrasena_voter?: SortOrder
     roleId?: SortOrder
-    electionId?: SortOrder
+    electionId?: SortOrderInput | SortOrder
     careerId?: SortOrder
     _count?: VoterCountOrderByAggregateInput
     _avg?: VoterAvgOrderByAggregateInput
@@ -12384,7 +12682,7 @@ export namespace Prisma {
     estado_voter?: StringWithAggregatesFilter<"Voter"> | string
     contrasena_voter?: StringWithAggregatesFilter<"Voter"> | string
     roleId?: IntWithAggregatesFilter<"Voter"> | number
-    electionId?: IntWithAggregatesFilter<"Voter"> | number
+    electionId?: IntNullableWithAggregatesFilter<"Voter"> | number | null
     careerId?: IntWithAggregatesFilter<"Voter"> | number
   }
 
@@ -12402,6 +12700,7 @@ export namespace Prisma {
     candidates?: CandidateListRelationFilter
     voters?: VoterListRelationFilter
     result?: XOR<ResultNullableScalarRelationFilter, ResultWhereInput> | null
+    Vote?: VoteListRelationFilter
   }
 
   export type ElectionOrderByWithRelationInput = {
@@ -12415,6 +12714,7 @@ export namespace Prisma {
     candidates?: CandidateOrderByRelationAggregateInput
     voters?: VoterOrderByRelationAggregateInput
     result?: ResultOrderByWithRelationInput
+    Vote?: VoteOrderByRelationAggregateInput
   }
 
   export type ElectionWhereUniqueInput = Prisma.AtLeast<{
@@ -12431,6 +12731,7 @@ export namespace Prisma {
     candidates?: CandidateListRelationFilter
     voters?: VoterListRelationFilter
     result?: XOR<ResultNullableScalarRelationFilter, ResultWhereInput> | null
+    Vote?: VoteListRelationFilter
   }, "id_election">
 
   export type ElectionOrderByWithAggregationInput = {
@@ -12470,9 +12771,14 @@ export namespace Prisma {
     num_doc_candidate?: BigIntFilter<"Candidate"> | bigint | number
     correo_candidate?: StringFilter<"Candidate"> | string
     estado_candidate?: StringFilter<"Candidate"> | string
-    foto_candidate?: StringFilter<"Candidate"> | string
-    electionId?: IntFilter<"Candidate"> | number
-    election?: XOR<ElectionScalarRelationFilter, ElectionWhereInput>
+    foto_candidate?: StringNullableFilter<"Candidate"> | string | null
+    contrasena_candidate?: StringFilter<"Candidate"> | string
+    roleId?: IntFilter<"Candidate"> | number
+    careerId?: IntFilter<"Candidate"> | number
+    electionId?: IntNullableFilter<"Candidate"> | number | null
+    role?: XOR<RoleScalarRelationFilter, RoleWhereInput>
+    career?: XOR<CareerScalarRelationFilter, CareerWhereInput>
+    election?: XOR<ElectionNullableScalarRelationFilter, ElectionWhereInput> | null
     proposals?: ProposalListRelationFilter
     result?: XOR<ResultNullableScalarRelationFilter, ResultWhereInput> | null
     votes?: VoteListRelationFilter
@@ -12486,8 +12792,13 @@ export namespace Prisma {
     num_doc_candidate?: SortOrder
     correo_candidate?: SortOrder
     estado_candidate?: SortOrder
-    foto_candidate?: SortOrder
-    electionId?: SortOrder
+    foto_candidate?: SortOrderInput | SortOrder
+    contrasena_candidate?: SortOrder
+    roleId?: SortOrder
+    careerId?: SortOrder
+    electionId?: SortOrderInput | SortOrder
+    role?: RoleOrderByWithRelationInput
+    career?: CareerOrderByWithRelationInput
     election?: ElectionOrderByWithRelationInput
     proposals?: ProposalOrderByRelationAggregateInput
     result?: ResultOrderByWithRelationInput
@@ -12496,22 +12807,27 @@ export namespace Prisma {
 
   export type CandidateWhereUniqueInput = Prisma.AtLeast<{
     id_candidate?: number
+    num_doc_candidate?: bigint | number
+    correo_candidate?: string
     AND?: CandidateWhereInput | CandidateWhereInput[]
     OR?: CandidateWhereInput[]
     NOT?: CandidateWhereInput | CandidateWhereInput[]
     nombre_candidate?: StringFilter<"Candidate"> | string
     apellido_candidate?: StringFilter<"Candidate"> | string
     tipo_doc_candidate?: StringFilter<"Candidate"> | string
-    num_doc_candidate?: BigIntFilter<"Candidate"> | bigint | number
-    correo_candidate?: StringFilter<"Candidate"> | string
     estado_candidate?: StringFilter<"Candidate"> | string
-    foto_candidate?: StringFilter<"Candidate"> | string
-    electionId?: IntFilter<"Candidate"> | number
-    election?: XOR<ElectionScalarRelationFilter, ElectionWhereInput>
+    foto_candidate?: StringNullableFilter<"Candidate"> | string | null
+    contrasena_candidate?: StringFilter<"Candidate"> | string
+    roleId?: IntFilter<"Candidate"> | number
+    careerId?: IntFilter<"Candidate"> | number
+    electionId?: IntNullableFilter<"Candidate"> | number | null
+    role?: XOR<RoleScalarRelationFilter, RoleWhereInput>
+    career?: XOR<CareerScalarRelationFilter, CareerWhereInput>
+    election?: XOR<ElectionNullableScalarRelationFilter, ElectionWhereInput> | null
     proposals?: ProposalListRelationFilter
     result?: XOR<ResultNullableScalarRelationFilter, ResultWhereInput> | null
     votes?: VoteListRelationFilter
-  }, "id_candidate">
+  }, "id_candidate" | "num_doc_candidate" | "correo_candidate">
 
   export type CandidateOrderByWithAggregationInput = {
     id_candidate?: SortOrder
@@ -12521,8 +12837,11 @@ export namespace Prisma {
     num_doc_candidate?: SortOrder
     correo_candidate?: SortOrder
     estado_candidate?: SortOrder
-    foto_candidate?: SortOrder
-    electionId?: SortOrder
+    foto_candidate?: SortOrderInput | SortOrder
+    contrasena_candidate?: SortOrder
+    roleId?: SortOrder
+    careerId?: SortOrder
+    electionId?: SortOrderInput | SortOrder
     _count?: CandidateCountOrderByAggregateInput
     _avg?: CandidateAvgOrderByAggregateInput
     _max?: CandidateMaxOrderByAggregateInput
@@ -12541,8 +12860,11 @@ export namespace Prisma {
     num_doc_candidate?: BigIntWithAggregatesFilter<"Candidate"> | bigint | number
     correo_candidate?: StringWithAggregatesFilter<"Candidate"> | string
     estado_candidate?: StringWithAggregatesFilter<"Candidate"> | string
-    foto_candidate?: StringWithAggregatesFilter<"Candidate"> | string
-    electionId?: IntWithAggregatesFilter<"Candidate"> | number
+    foto_candidate?: StringNullableWithAggregatesFilter<"Candidate"> | string | null
+    contrasena_candidate?: StringWithAggregatesFilter<"Candidate"> | string
+    roleId?: IntWithAggregatesFilter<"Candidate"> | number
+    careerId?: IntWithAggregatesFilter<"Candidate"> | number
+    electionId?: IntNullableWithAggregatesFilter<"Candidate"> | number | null
   }
 
   export type VoteWhereInput = {
@@ -12554,8 +12876,10 @@ export namespace Prisma {
     hora_vote?: DateTimeFilter<"Vote"> | Date | string
     voterId?: IntFilter<"Vote"> | number
     candidateId?: IntNullableFilter<"Vote"> | number | null
+    electionId?: IntNullableFilter<"Vote"> | number | null
     voter?: XOR<VoterScalarRelationFilter, VoterWhereInput>
     candidate?: XOR<CandidateNullableScalarRelationFilter, CandidateWhereInput> | null
+    election?: XOR<ElectionNullableScalarRelationFilter, ElectionWhereInput> | null
   }
 
   export type VoteOrderByWithRelationInput = {
@@ -12564,22 +12888,26 @@ export namespace Prisma {
     hora_vote?: SortOrder
     voterId?: SortOrder
     candidateId?: SortOrderInput | SortOrder
+    electionId?: SortOrderInput | SortOrder
     voter?: VoterOrderByWithRelationInput
     candidate?: CandidateOrderByWithRelationInput
+    election?: ElectionOrderByWithRelationInput
   }
 
   export type VoteWhereUniqueInput = Prisma.AtLeast<{
     id_vote?: number
-    voterId?: number
     AND?: VoteWhereInput | VoteWhereInput[]
     OR?: VoteWhereInput[]
     NOT?: VoteWhereInput | VoteWhereInput[]
     fecha_vote?: DateTimeFilter<"Vote"> | Date | string
     hora_vote?: DateTimeFilter<"Vote"> | Date | string
+    voterId?: IntFilter<"Vote"> | number
     candidateId?: IntNullableFilter<"Vote"> | number | null
+    electionId?: IntNullableFilter<"Vote"> | number | null
     voter?: XOR<VoterScalarRelationFilter, VoterWhereInput>
     candidate?: XOR<CandidateNullableScalarRelationFilter, CandidateWhereInput> | null
-  }, "id_vote" | "voterId">
+    election?: XOR<ElectionNullableScalarRelationFilter, ElectionWhereInput> | null
+  }, "id_vote">
 
   export type VoteOrderByWithAggregationInput = {
     id_vote?: SortOrder
@@ -12587,6 +12915,7 @@ export namespace Prisma {
     hora_vote?: SortOrder
     voterId?: SortOrder
     candidateId?: SortOrderInput | SortOrder
+    electionId?: SortOrderInput | SortOrder
     _count?: VoteCountOrderByAggregateInput
     _avg?: VoteAvgOrderByAggregateInput
     _max?: VoteMaxOrderByAggregateInput
@@ -12603,6 +12932,7 @@ export namespace Prisma {
     hora_vote?: DateTimeWithAggregatesFilter<"Vote"> | Date | string
     voterId?: IntWithAggregatesFilter<"Vote"> | number
     candidateId?: IntNullableWithAggregatesFilter<"Vote"> | number | null
+    electionId?: IntNullableWithAggregatesFilter<"Vote"> | number | null
   }
 
   export type ProposalWhereInput = {
@@ -12670,6 +13000,7 @@ export namespace Prisma {
     nombre_career?: StringFilter<"Career"> | string
     facultad_career?: StringFilter<"Career"> | string
     voters?: VoterListRelationFilter
+    candidates?: CandidateListRelationFilter
   }
 
   export type CareerOrderByWithRelationInput = {
@@ -12677,6 +13008,7 @@ export namespace Prisma {
     nombre_career?: SortOrder
     facultad_career?: SortOrder
     voters?: VoterOrderByRelationAggregateInput
+    candidates?: CandidateOrderByRelationAggregateInput
   }
 
   export type CareerWhereUniqueInput = Prisma.AtLeast<{
@@ -12687,6 +13019,7 @@ export namespace Prisma {
     nombre_career?: StringFilter<"Career"> | string
     facultad_career?: StringFilter<"Career"> | string
     voters?: VoterListRelationFilter
+    candidates?: CandidateListRelationFilter
   }, "id_career">
 
   export type CareerOrderByWithAggregationInput = {
@@ -12771,12 +13104,14 @@ export namespace Prisma {
     id_role?: IntFilter<"Role"> | number
     nombre_role?: StringFilter<"Role"> | string
     voters?: VoterListRelationFilter
+    candidates?: CandidateListRelationFilter
   }
 
   export type RoleOrderByWithRelationInput = {
     id_role?: SortOrder
     nombre_role?: SortOrder
     voters?: VoterOrderByRelationAggregateInput
+    candidates?: CandidateOrderByRelationAggregateInput
   }
 
   export type RoleWhereUniqueInput = Prisma.AtLeast<{
@@ -12786,6 +13121,7 @@ export namespace Prisma {
     NOT?: RoleWhereInput | RoleWhereInput[]
     nombre_role?: StringFilter<"Role"> | string
     voters?: VoterListRelationFilter
+    candidates?: CandidateListRelationFilter
   }, "id_role">
 
   export type RoleOrderByWithAggregationInput = {
@@ -12886,9 +13222,9 @@ export namespace Prisma {
     estado_voter: string
     contrasena_voter: string
     role: RoleCreateNestedOneWithoutVotersInput
-    election: ElectionCreateNestedOneWithoutVotersInput
+    election?: ElectionCreateNestedOneWithoutVotersInput
     career: CareerCreateNestedOneWithoutVotersInput
-    vote?: VoteCreateNestedOneWithoutVoterInput
+    vote?: VoteCreateNestedManyWithoutVoterInput
   }
 
   export type VoterUncheckedCreateInput = {
@@ -12901,9 +13237,9 @@ export namespace Prisma {
     estado_voter: string
     contrasena_voter: string
     roleId: number
-    electionId: number
+    electionId?: number | null
     careerId: number
-    vote?: VoteUncheckedCreateNestedOneWithoutVoterInput
+    vote?: VoteUncheckedCreateNestedManyWithoutVoterInput
   }
 
   export type VoterUpdateInput = {
@@ -12915,9 +13251,9 @@ export namespace Prisma {
     estado_voter?: StringFieldUpdateOperationsInput | string
     contrasena_voter?: StringFieldUpdateOperationsInput | string
     role?: RoleUpdateOneRequiredWithoutVotersNestedInput
-    election?: ElectionUpdateOneRequiredWithoutVotersNestedInput
+    election?: ElectionUpdateOneWithoutVotersNestedInput
     career?: CareerUpdateOneRequiredWithoutVotersNestedInput
-    vote?: VoteUpdateOneWithoutVoterNestedInput
+    vote?: VoteUpdateManyWithoutVoterNestedInput
   }
 
   export type VoterUncheckedUpdateInput = {
@@ -12930,9 +13266,9 @@ export namespace Prisma {
     estado_voter?: StringFieldUpdateOperationsInput | string
     contrasena_voter?: StringFieldUpdateOperationsInput | string
     roleId?: IntFieldUpdateOperationsInput | number
-    electionId?: IntFieldUpdateOperationsInput | number
+    electionId?: NullableIntFieldUpdateOperationsInput | number | null
     careerId?: IntFieldUpdateOperationsInput | number
-    vote?: VoteUncheckedUpdateOneWithoutVoterNestedInput
+    vote?: VoteUncheckedUpdateManyWithoutVoterNestedInput
   }
 
   export type VoterCreateManyInput = {
@@ -12945,7 +13281,7 @@ export namespace Prisma {
     estado_voter: string
     contrasena_voter: string
     roleId: number
-    electionId: number
+    electionId?: number | null
     careerId: number
   }
 
@@ -12969,7 +13305,7 @@ export namespace Prisma {
     estado_voter?: StringFieldUpdateOperationsInput | string
     contrasena_voter?: StringFieldUpdateOperationsInput | string
     roleId?: IntFieldUpdateOperationsInput | number
-    electionId?: IntFieldUpdateOperationsInput | number
+    electionId?: NullableIntFieldUpdateOperationsInput | number | null
     careerId?: IntFieldUpdateOperationsInput | number
   }
 
@@ -12982,6 +13318,7 @@ export namespace Prisma {
     candidates?: CandidateCreateNestedManyWithoutElectionInput
     voters?: VoterCreateNestedManyWithoutElectionInput
     result?: ResultCreateNestedOneWithoutElectionInput
+    Vote?: VoteCreateNestedManyWithoutElectionInput
   }
 
   export type ElectionUncheckedCreateInput = {
@@ -12994,6 +13331,7 @@ export namespace Prisma {
     candidates?: CandidateUncheckedCreateNestedManyWithoutElectionInput
     voters?: VoterUncheckedCreateNestedManyWithoutElectionInput
     result?: ResultUncheckedCreateNestedOneWithoutElectionInput
+    Vote?: VoteUncheckedCreateNestedManyWithoutElectionInput
   }
 
   export type ElectionUpdateInput = {
@@ -13005,6 +13343,7 @@ export namespace Prisma {
     candidates?: CandidateUpdateManyWithoutElectionNestedInput
     voters?: VoterUpdateManyWithoutElectionNestedInput
     result?: ResultUpdateOneWithoutElectionNestedInput
+    Vote?: VoteUpdateManyWithoutElectionNestedInput
   }
 
   export type ElectionUncheckedUpdateInput = {
@@ -13017,6 +13356,7 @@ export namespace Prisma {
     candidates?: CandidateUncheckedUpdateManyWithoutElectionNestedInput
     voters?: VoterUncheckedUpdateManyWithoutElectionNestedInput
     result?: ResultUncheckedUpdateOneWithoutElectionNestedInput
+    Vote?: VoteUncheckedUpdateManyWithoutElectionNestedInput
   }
 
   export type ElectionCreateManyInput = {
@@ -13051,8 +13391,11 @@ export namespace Prisma {
     num_doc_candidate: bigint | number
     correo_candidate: string
     estado_candidate: string
-    foto_candidate: string
-    election: ElectionCreateNestedOneWithoutCandidatesInput
+    foto_candidate?: string | null
+    contrasena_candidate: string
+    role: RoleCreateNestedOneWithoutCandidatesInput
+    career: CareerCreateNestedOneWithoutCandidatesInput
+    election?: ElectionCreateNestedOneWithoutCandidatesInput
     proposals?: ProposalCreateNestedManyWithoutCandidateInput
     result?: ResultCreateNestedOneWithoutCandidateInput
     votes?: VoteCreateNestedManyWithoutCandidateInput
@@ -13066,8 +13409,11 @@ export namespace Prisma {
     num_doc_candidate: bigint | number
     correo_candidate: string
     estado_candidate: string
-    foto_candidate: string
-    electionId: number
+    foto_candidate?: string | null
+    contrasena_candidate: string
+    roleId: number
+    careerId: number
+    electionId?: number | null
     proposals?: ProposalUncheckedCreateNestedManyWithoutCandidateInput
     result?: ResultUncheckedCreateNestedOneWithoutCandidateInput
     votes?: VoteUncheckedCreateNestedManyWithoutCandidateInput
@@ -13080,8 +13426,11 @@ export namespace Prisma {
     num_doc_candidate?: BigIntFieldUpdateOperationsInput | bigint | number
     correo_candidate?: StringFieldUpdateOperationsInput | string
     estado_candidate?: StringFieldUpdateOperationsInput | string
-    foto_candidate?: StringFieldUpdateOperationsInput | string
-    election?: ElectionUpdateOneRequiredWithoutCandidatesNestedInput
+    foto_candidate?: NullableStringFieldUpdateOperationsInput | string | null
+    contrasena_candidate?: StringFieldUpdateOperationsInput | string
+    role?: RoleUpdateOneRequiredWithoutCandidatesNestedInput
+    career?: CareerUpdateOneRequiredWithoutCandidatesNestedInput
+    election?: ElectionUpdateOneWithoutCandidatesNestedInput
     proposals?: ProposalUpdateManyWithoutCandidateNestedInput
     result?: ResultUpdateOneWithoutCandidateNestedInput
     votes?: VoteUpdateManyWithoutCandidateNestedInput
@@ -13095,8 +13444,11 @@ export namespace Prisma {
     num_doc_candidate?: BigIntFieldUpdateOperationsInput | bigint | number
     correo_candidate?: StringFieldUpdateOperationsInput | string
     estado_candidate?: StringFieldUpdateOperationsInput | string
-    foto_candidate?: StringFieldUpdateOperationsInput | string
-    electionId?: IntFieldUpdateOperationsInput | number
+    foto_candidate?: NullableStringFieldUpdateOperationsInput | string | null
+    contrasena_candidate?: StringFieldUpdateOperationsInput | string
+    roleId?: IntFieldUpdateOperationsInput | number
+    careerId?: IntFieldUpdateOperationsInput | number
+    electionId?: NullableIntFieldUpdateOperationsInput | number | null
     proposals?: ProposalUncheckedUpdateManyWithoutCandidateNestedInput
     result?: ResultUncheckedUpdateOneWithoutCandidateNestedInput
     votes?: VoteUncheckedUpdateManyWithoutCandidateNestedInput
@@ -13110,8 +13462,11 @@ export namespace Prisma {
     num_doc_candidate: bigint | number
     correo_candidate: string
     estado_candidate: string
-    foto_candidate: string
-    electionId: number
+    foto_candidate?: string | null
+    contrasena_candidate: string
+    roleId: number
+    careerId: number
+    electionId?: number | null
   }
 
   export type CandidateUpdateManyMutationInput = {
@@ -13121,7 +13476,8 @@ export namespace Prisma {
     num_doc_candidate?: BigIntFieldUpdateOperationsInput | bigint | number
     correo_candidate?: StringFieldUpdateOperationsInput | string
     estado_candidate?: StringFieldUpdateOperationsInput | string
-    foto_candidate?: StringFieldUpdateOperationsInput | string
+    foto_candidate?: NullableStringFieldUpdateOperationsInput | string | null
+    contrasena_candidate?: StringFieldUpdateOperationsInput | string
   }
 
   export type CandidateUncheckedUpdateManyInput = {
@@ -13132,8 +13488,11 @@ export namespace Prisma {
     num_doc_candidate?: BigIntFieldUpdateOperationsInput | bigint | number
     correo_candidate?: StringFieldUpdateOperationsInput | string
     estado_candidate?: StringFieldUpdateOperationsInput | string
-    foto_candidate?: StringFieldUpdateOperationsInput | string
-    electionId?: IntFieldUpdateOperationsInput | number
+    foto_candidate?: NullableStringFieldUpdateOperationsInput | string | null
+    contrasena_candidate?: StringFieldUpdateOperationsInput | string
+    roleId?: IntFieldUpdateOperationsInput | number
+    careerId?: IntFieldUpdateOperationsInput | number
+    electionId?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type VoteCreateInput = {
@@ -13141,6 +13500,7 @@ export namespace Prisma {
     hora_vote: Date | string
     voter: VoterCreateNestedOneWithoutVoteInput
     candidate?: CandidateCreateNestedOneWithoutVotesInput
+    election?: ElectionCreateNestedOneWithoutVoteInput
   }
 
   export type VoteUncheckedCreateInput = {
@@ -13149,6 +13509,7 @@ export namespace Prisma {
     hora_vote: Date | string
     voterId: number
     candidateId?: number | null
+    electionId?: number | null
   }
 
   export type VoteUpdateInput = {
@@ -13156,6 +13517,7 @@ export namespace Prisma {
     hora_vote?: DateTimeFieldUpdateOperationsInput | Date | string
     voter?: VoterUpdateOneRequiredWithoutVoteNestedInput
     candidate?: CandidateUpdateOneWithoutVotesNestedInput
+    election?: ElectionUpdateOneWithoutVoteNestedInput
   }
 
   export type VoteUncheckedUpdateInput = {
@@ -13164,6 +13526,7 @@ export namespace Prisma {
     hora_vote?: DateTimeFieldUpdateOperationsInput | Date | string
     voterId?: IntFieldUpdateOperationsInput | number
     candidateId?: NullableIntFieldUpdateOperationsInput | number | null
+    electionId?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type VoteCreateManyInput = {
@@ -13172,6 +13535,7 @@ export namespace Prisma {
     hora_vote: Date | string
     voterId: number
     candidateId?: number | null
+    electionId?: number | null
   }
 
   export type VoteUpdateManyMutationInput = {
@@ -13185,6 +13549,7 @@ export namespace Prisma {
     hora_vote?: DateTimeFieldUpdateOperationsInput | Date | string
     voterId?: IntFieldUpdateOperationsInput | number
     candidateId?: NullableIntFieldUpdateOperationsInput | number | null
+    electionId?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type ProposalCreateInput = {
@@ -13243,6 +13608,7 @@ export namespace Prisma {
     nombre_career: string
     facultad_career: string
     voters?: VoterCreateNestedManyWithoutCareerInput
+    candidates?: CandidateCreateNestedManyWithoutCareerInput
   }
 
   export type CareerUncheckedCreateInput = {
@@ -13250,12 +13616,14 @@ export namespace Prisma {
     nombre_career: string
     facultad_career: string
     voters?: VoterUncheckedCreateNestedManyWithoutCareerInput
+    candidates?: CandidateUncheckedCreateNestedManyWithoutCareerInput
   }
 
   export type CareerUpdateInput = {
     nombre_career?: StringFieldUpdateOperationsInput | string
     facultad_career?: StringFieldUpdateOperationsInput | string
     voters?: VoterUpdateManyWithoutCareerNestedInput
+    candidates?: CandidateUpdateManyWithoutCareerNestedInput
   }
 
   export type CareerUncheckedUpdateInput = {
@@ -13263,6 +13631,7 @@ export namespace Prisma {
     nombre_career?: StringFieldUpdateOperationsInput | string
     facultad_career?: StringFieldUpdateOperationsInput | string
     voters?: VoterUncheckedUpdateManyWithoutCareerNestedInput
+    candidates?: CandidateUncheckedUpdateManyWithoutCareerNestedInput
   }
 
   export type CareerCreateManyInput = {
@@ -13329,23 +13698,27 @@ export namespace Prisma {
   export type RoleCreateInput = {
     nombre_role: string
     voters?: VoterCreateNestedManyWithoutRoleInput
+    candidates?: CandidateCreateNestedManyWithoutRoleInput
   }
 
   export type RoleUncheckedCreateInput = {
     id_role?: number
     nombre_role: string
     voters?: VoterUncheckedCreateNestedManyWithoutRoleInput
+    candidates?: CandidateUncheckedCreateNestedManyWithoutRoleInput
   }
 
   export type RoleUpdateInput = {
     nombre_role?: StringFieldUpdateOperationsInput | string
     voters?: VoterUpdateManyWithoutRoleNestedInput
+    candidates?: CandidateUpdateManyWithoutRoleNestedInput
   }
 
   export type RoleUncheckedUpdateInput = {
     id_role?: IntFieldUpdateOperationsInput | number
     nombre_role?: StringFieldUpdateOperationsInput | string
     voters?: VoterUncheckedUpdateManyWithoutRoleNestedInput
+    candidates?: CandidateUncheckedUpdateManyWithoutRoleNestedInput
   }
 
   export type RoleCreateManyInput = {
@@ -13499,14 +13872,25 @@ export namespace Prisma {
     _max?: NestedBigIntFilter<$PrismaModel>
   }
 
+  export type IntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
   export type RoleScalarRelationFilter = {
     is?: RoleWhereInput
     isNot?: RoleWhereInput
   }
 
-  export type ElectionScalarRelationFilter = {
-    is?: ElectionWhereInput
-    isNot?: ElectionWhereInput
+  export type ElectionNullableScalarRelationFilter = {
+    is?: ElectionWhereInput | null
+    isNot?: ElectionWhereInput | null
   }
 
   export type CareerScalarRelationFilter = {
@@ -13514,9 +13898,19 @@ export namespace Prisma {
     isNot?: CareerWhereInput
   }
 
-  export type VoteNullableScalarRelationFilter = {
-    is?: VoteWhereInput | null
-    isNot?: VoteWhereInput | null
+  export type VoteListRelationFilter = {
+    every?: VoteWhereInput
+    some?: VoteWhereInput
+    none?: VoteWhereInput
+  }
+
+  export type SortOrderInput = {
+    sort: SortOrder
+    nulls?: NullsOrder
+  }
+
+  export type VoteOrderByRelationAggregateInput = {
+    _count?: SortOrder
   }
 
   export type VoterCountOrderByAggregateInput = {
@@ -13575,6 +13969,22 @@ export namespace Prisma {
     roleId?: SortOrder
     electionId?: SortOrder
     careerId?: SortOrder
+  }
+
+  export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
   }
 
   export type DateTimeFilter<$PrismaModel = never> = {
@@ -13669,23 +14079,28 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
+  export type StringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  }
+
   export type ProposalListRelationFilter = {
     every?: ProposalWhereInput
     some?: ProposalWhereInput
     none?: ProposalWhereInput
   }
 
-  export type VoteListRelationFilter = {
-    every?: VoteWhereInput
-    some?: VoteWhereInput
-    none?: VoteWhereInput
-  }
-
   export type ProposalOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type VoteOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -13698,12 +14113,17 @@ export namespace Prisma {
     correo_candidate?: SortOrder
     estado_candidate?: SortOrder
     foto_candidate?: SortOrder
+    contrasena_candidate?: SortOrder
+    roleId?: SortOrder
+    careerId?: SortOrder
     electionId?: SortOrder
   }
 
   export type CandidateAvgOrderByAggregateInput = {
     id_candidate?: SortOrder
     num_doc_candidate?: SortOrder
+    roleId?: SortOrder
+    careerId?: SortOrder
     electionId?: SortOrder
   }
 
@@ -13716,6 +14136,9 @@ export namespace Prisma {
     correo_candidate?: SortOrder
     estado_candidate?: SortOrder
     foto_candidate?: SortOrder
+    contrasena_candidate?: SortOrder
+    roleId?: SortOrder
+    careerId?: SortOrder
     electionId?: SortOrder
   }
 
@@ -13728,24 +14151,36 @@ export namespace Prisma {
     correo_candidate?: SortOrder
     estado_candidate?: SortOrder
     foto_candidate?: SortOrder
+    contrasena_candidate?: SortOrder
+    roleId?: SortOrder
+    careerId?: SortOrder
     electionId?: SortOrder
   }
 
   export type CandidateSumOrderByAggregateInput = {
     id_candidate?: SortOrder
     num_doc_candidate?: SortOrder
+    roleId?: SortOrder
+    careerId?: SortOrder
     electionId?: SortOrder
   }
 
-  export type IntNullableFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
   export type VoterScalarRelationFilter = {
@@ -13758,23 +14193,20 @@ export namespace Prisma {
     isNot?: CandidateWhereInput | null
   }
 
-  export type SortOrderInput = {
-    sort: SortOrder
-    nulls?: NullsOrder
-  }
-
   export type VoteCountOrderByAggregateInput = {
     id_vote?: SortOrder
     fecha_vote?: SortOrder
     hora_vote?: SortOrder
     voterId?: SortOrder
     candidateId?: SortOrder
+    electionId?: SortOrder
   }
 
   export type VoteAvgOrderByAggregateInput = {
     id_vote?: SortOrder
     voterId?: SortOrder
     candidateId?: SortOrder
+    electionId?: SortOrder
   }
 
   export type VoteMaxOrderByAggregateInput = {
@@ -13783,6 +14215,7 @@ export namespace Prisma {
     hora_vote?: SortOrder
     voterId?: SortOrder
     candidateId?: SortOrder
+    electionId?: SortOrder
   }
 
   export type VoteMinOrderByAggregateInput = {
@@ -13791,28 +14224,14 @@ export namespace Prisma {
     hora_vote?: SortOrder
     voterId?: SortOrder
     candidateId?: SortOrder
+    electionId?: SortOrder
   }
 
   export type VoteSumOrderByAggregateInput = {
     id_vote?: SortOrder
     voterId?: SortOrder
     candidateId?: SortOrder
-  }
-
-  export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _avg?: NestedFloatNullableFilter<$PrismaModel>
-    _sum?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedIntNullableFilter<$PrismaModel>
-    _max?: NestedIntNullableFilter<$PrismaModel>
+    electionId?: SortOrder
   }
 
   export type CandidateScalarRelationFilter = {
@@ -13878,6 +14297,11 @@ export namespace Prisma {
 
   export type CareerSumOrderByAggregateInput = {
     id_career?: SortOrder
+  }
+
+  export type ElectionScalarRelationFilter = {
+    is?: ElectionWhereInput
+    isNot?: ElectionWhereInput
   }
 
   export type ResultCountOrderByAggregateInput = {
@@ -14018,16 +14442,18 @@ export namespace Prisma {
     connect?: CareerWhereUniqueInput
   }
 
-  export type VoteCreateNestedOneWithoutVoterInput = {
-    create?: XOR<VoteCreateWithoutVoterInput, VoteUncheckedCreateWithoutVoterInput>
-    connectOrCreate?: VoteCreateOrConnectWithoutVoterInput
-    connect?: VoteWhereUniqueInput
+  export type VoteCreateNestedManyWithoutVoterInput = {
+    create?: XOR<VoteCreateWithoutVoterInput, VoteUncheckedCreateWithoutVoterInput> | VoteCreateWithoutVoterInput[] | VoteUncheckedCreateWithoutVoterInput[]
+    connectOrCreate?: VoteCreateOrConnectWithoutVoterInput | VoteCreateOrConnectWithoutVoterInput[]
+    createMany?: VoteCreateManyVoterInputEnvelope
+    connect?: VoteWhereUniqueInput | VoteWhereUniqueInput[]
   }
 
-  export type VoteUncheckedCreateNestedOneWithoutVoterInput = {
-    create?: XOR<VoteCreateWithoutVoterInput, VoteUncheckedCreateWithoutVoterInput>
-    connectOrCreate?: VoteCreateOrConnectWithoutVoterInput
-    connect?: VoteWhereUniqueInput
+  export type VoteUncheckedCreateNestedManyWithoutVoterInput = {
+    create?: XOR<VoteCreateWithoutVoterInput, VoteUncheckedCreateWithoutVoterInput> | VoteCreateWithoutVoterInput[] | VoteUncheckedCreateWithoutVoterInput[]
+    connectOrCreate?: VoteCreateOrConnectWithoutVoterInput | VoteCreateOrConnectWithoutVoterInput[]
+    createMany?: VoteCreateManyVoterInputEnvelope
+    connect?: VoteWhereUniqueInput | VoteWhereUniqueInput[]
   }
 
   export type RoleUpdateOneRequiredWithoutVotersNestedInput = {
@@ -14038,10 +14464,12 @@ export namespace Prisma {
     update?: XOR<XOR<RoleUpdateToOneWithWhereWithoutVotersInput, RoleUpdateWithoutVotersInput>, RoleUncheckedUpdateWithoutVotersInput>
   }
 
-  export type ElectionUpdateOneRequiredWithoutVotersNestedInput = {
+  export type ElectionUpdateOneWithoutVotersNestedInput = {
     create?: XOR<ElectionCreateWithoutVotersInput, ElectionUncheckedCreateWithoutVotersInput>
     connectOrCreate?: ElectionCreateOrConnectWithoutVotersInput
     upsert?: ElectionUpsertWithoutVotersInput
+    disconnect?: ElectionWhereInput | boolean
+    delete?: ElectionWhereInput | boolean
     connect?: ElectionWhereUniqueInput
     update?: XOR<XOR<ElectionUpdateToOneWithWhereWithoutVotersInput, ElectionUpdateWithoutVotersInput>, ElectionUncheckedUpdateWithoutVotersInput>
   }
@@ -14054,24 +14482,40 @@ export namespace Prisma {
     update?: XOR<XOR<CareerUpdateToOneWithWhereWithoutVotersInput, CareerUpdateWithoutVotersInput>, CareerUncheckedUpdateWithoutVotersInput>
   }
 
-  export type VoteUpdateOneWithoutVoterNestedInput = {
-    create?: XOR<VoteCreateWithoutVoterInput, VoteUncheckedCreateWithoutVoterInput>
-    connectOrCreate?: VoteCreateOrConnectWithoutVoterInput
-    upsert?: VoteUpsertWithoutVoterInput
-    disconnect?: VoteWhereInput | boolean
-    delete?: VoteWhereInput | boolean
-    connect?: VoteWhereUniqueInput
-    update?: XOR<XOR<VoteUpdateToOneWithWhereWithoutVoterInput, VoteUpdateWithoutVoterInput>, VoteUncheckedUpdateWithoutVoterInput>
+  export type VoteUpdateManyWithoutVoterNestedInput = {
+    create?: XOR<VoteCreateWithoutVoterInput, VoteUncheckedCreateWithoutVoterInput> | VoteCreateWithoutVoterInput[] | VoteUncheckedCreateWithoutVoterInput[]
+    connectOrCreate?: VoteCreateOrConnectWithoutVoterInput | VoteCreateOrConnectWithoutVoterInput[]
+    upsert?: VoteUpsertWithWhereUniqueWithoutVoterInput | VoteUpsertWithWhereUniqueWithoutVoterInput[]
+    createMany?: VoteCreateManyVoterInputEnvelope
+    set?: VoteWhereUniqueInput | VoteWhereUniqueInput[]
+    disconnect?: VoteWhereUniqueInput | VoteWhereUniqueInput[]
+    delete?: VoteWhereUniqueInput | VoteWhereUniqueInput[]
+    connect?: VoteWhereUniqueInput | VoteWhereUniqueInput[]
+    update?: VoteUpdateWithWhereUniqueWithoutVoterInput | VoteUpdateWithWhereUniqueWithoutVoterInput[]
+    updateMany?: VoteUpdateManyWithWhereWithoutVoterInput | VoteUpdateManyWithWhereWithoutVoterInput[]
+    deleteMany?: VoteScalarWhereInput | VoteScalarWhereInput[]
   }
 
-  export type VoteUncheckedUpdateOneWithoutVoterNestedInput = {
-    create?: XOR<VoteCreateWithoutVoterInput, VoteUncheckedCreateWithoutVoterInput>
-    connectOrCreate?: VoteCreateOrConnectWithoutVoterInput
-    upsert?: VoteUpsertWithoutVoterInput
-    disconnect?: VoteWhereInput | boolean
-    delete?: VoteWhereInput | boolean
-    connect?: VoteWhereUniqueInput
-    update?: XOR<XOR<VoteUpdateToOneWithWhereWithoutVoterInput, VoteUpdateWithoutVoterInput>, VoteUncheckedUpdateWithoutVoterInput>
+  export type NullableIntFieldUpdateOperationsInput = {
+    set?: number | null
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
+  export type VoteUncheckedUpdateManyWithoutVoterNestedInput = {
+    create?: XOR<VoteCreateWithoutVoterInput, VoteUncheckedCreateWithoutVoterInput> | VoteCreateWithoutVoterInput[] | VoteUncheckedCreateWithoutVoterInput[]
+    connectOrCreate?: VoteCreateOrConnectWithoutVoterInput | VoteCreateOrConnectWithoutVoterInput[]
+    upsert?: VoteUpsertWithWhereUniqueWithoutVoterInput | VoteUpsertWithWhereUniqueWithoutVoterInput[]
+    createMany?: VoteCreateManyVoterInputEnvelope
+    set?: VoteWhereUniqueInput | VoteWhereUniqueInput[]
+    disconnect?: VoteWhereUniqueInput | VoteWhereUniqueInput[]
+    delete?: VoteWhereUniqueInput | VoteWhereUniqueInput[]
+    connect?: VoteWhereUniqueInput | VoteWhereUniqueInput[]
+    update?: VoteUpdateWithWhereUniqueWithoutVoterInput | VoteUpdateWithWhereUniqueWithoutVoterInput[]
+    updateMany?: VoteUpdateManyWithWhereWithoutVoterInput | VoteUpdateManyWithWhereWithoutVoterInput[]
+    deleteMany?: VoteScalarWhereInput | VoteScalarWhereInput[]
   }
 
   export type AdministradorCreateNestedOneWithoutElectionsInput = {
@@ -14100,6 +14544,13 @@ export namespace Prisma {
     connect?: ResultWhereUniqueInput
   }
 
+  export type VoteCreateNestedManyWithoutElectionInput = {
+    create?: XOR<VoteCreateWithoutElectionInput, VoteUncheckedCreateWithoutElectionInput> | VoteCreateWithoutElectionInput[] | VoteUncheckedCreateWithoutElectionInput[]
+    connectOrCreate?: VoteCreateOrConnectWithoutElectionInput | VoteCreateOrConnectWithoutElectionInput[]
+    createMany?: VoteCreateManyElectionInputEnvelope
+    connect?: VoteWhereUniqueInput | VoteWhereUniqueInput[]
+  }
+
   export type CandidateUncheckedCreateNestedManyWithoutElectionInput = {
     create?: XOR<CandidateCreateWithoutElectionInput, CandidateUncheckedCreateWithoutElectionInput> | CandidateCreateWithoutElectionInput[] | CandidateUncheckedCreateWithoutElectionInput[]
     connectOrCreate?: CandidateCreateOrConnectWithoutElectionInput | CandidateCreateOrConnectWithoutElectionInput[]
@@ -14118,6 +14569,13 @@ export namespace Prisma {
     create?: XOR<ResultCreateWithoutElectionInput, ResultUncheckedCreateWithoutElectionInput>
     connectOrCreate?: ResultCreateOrConnectWithoutElectionInput
     connect?: ResultWhereUniqueInput
+  }
+
+  export type VoteUncheckedCreateNestedManyWithoutElectionInput = {
+    create?: XOR<VoteCreateWithoutElectionInput, VoteUncheckedCreateWithoutElectionInput> | VoteCreateWithoutElectionInput[] | VoteUncheckedCreateWithoutElectionInput[]
+    connectOrCreate?: VoteCreateOrConnectWithoutElectionInput | VoteCreateOrConnectWithoutElectionInput[]
+    createMany?: VoteCreateManyElectionInputEnvelope
+    connect?: VoteWhereUniqueInput | VoteWhereUniqueInput[]
   }
 
   export type DateTimeFieldUpdateOperationsInput = {
@@ -14170,6 +14628,20 @@ export namespace Prisma {
     update?: XOR<XOR<ResultUpdateToOneWithWhereWithoutElectionInput, ResultUpdateWithoutElectionInput>, ResultUncheckedUpdateWithoutElectionInput>
   }
 
+  export type VoteUpdateManyWithoutElectionNestedInput = {
+    create?: XOR<VoteCreateWithoutElectionInput, VoteUncheckedCreateWithoutElectionInput> | VoteCreateWithoutElectionInput[] | VoteUncheckedCreateWithoutElectionInput[]
+    connectOrCreate?: VoteCreateOrConnectWithoutElectionInput | VoteCreateOrConnectWithoutElectionInput[]
+    upsert?: VoteUpsertWithWhereUniqueWithoutElectionInput | VoteUpsertWithWhereUniqueWithoutElectionInput[]
+    createMany?: VoteCreateManyElectionInputEnvelope
+    set?: VoteWhereUniqueInput | VoteWhereUniqueInput[]
+    disconnect?: VoteWhereUniqueInput | VoteWhereUniqueInput[]
+    delete?: VoteWhereUniqueInput | VoteWhereUniqueInput[]
+    connect?: VoteWhereUniqueInput | VoteWhereUniqueInput[]
+    update?: VoteUpdateWithWhereUniqueWithoutElectionInput | VoteUpdateWithWhereUniqueWithoutElectionInput[]
+    updateMany?: VoteUpdateManyWithWhereWithoutElectionInput | VoteUpdateManyWithWhereWithoutElectionInput[]
+    deleteMany?: VoteScalarWhereInput | VoteScalarWhereInput[]
+  }
+
   export type CandidateUncheckedUpdateManyWithoutElectionNestedInput = {
     create?: XOR<CandidateCreateWithoutElectionInput, CandidateUncheckedCreateWithoutElectionInput> | CandidateCreateWithoutElectionInput[] | CandidateUncheckedCreateWithoutElectionInput[]
     connectOrCreate?: CandidateCreateOrConnectWithoutElectionInput | CandidateCreateOrConnectWithoutElectionInput[]
@@ -14206,6 +14678,32 @@ export namespace Prisma {
     delete?: ResultWhereInput | boolean
     connect?: ResultWhereUniqueInput
     update?: XOR<XOR<ResultUpdateToOneWithWhereWithoutElectionInput, ResultUpdateWithoutElectionInput>, ResultUncheckedUpdateWithoutElectionInput>
+  }
+
+  export type VoteUncheckedUpdateManyWithoutElectionNestedInput = {
+    create?: XOR<VoteCreateWithoutElectionInput, VoteUncheckedCreateWithoutElectionInput> | VoteCreateWithoutElectionInput[] | VoteUncheckedCreateWithoutElectionInput[]
+    connectOrCreate?: VoteCreateOrConnectWithoutElectionInput | VoteCreateOrConnectWithoutElectionInput[]
+    upsert?: VoteUpsertWithWhereUniqueWithoutElectionInput | VoteUpsertWithWhereUniqueWithoutElectionInput[]
+    createMany?: VoteCreateManyElectionInputEnvelope
+    set?: VoteWhereUniqueInput | VoteWhereUniqueInput[]
+    disconnect?: VoteWhereUniqueInput | VoteWhereUniqueInput[]
+    delete?: VoteWhereUniqueInput | VoteWhereUniqueInput[]
+    connect?: VoteWhereUniqueInput | VoteWhereUniqueInput[]
+    update?: VoteUpdateWithWhereUniqueWithoutElectionInput | VoteUpdateWithWhereUniqueWithoutElectionInput[]
+    updateMany?: VoteUpdateManyWithWhereWithoutElectionInput | VoteUpdateManyWithWhereWithoutElectionInput[]
+    deleteMany?: VoteScalarWhereInput | VoteScalarWhereInput[]
+  }
+
+  export type RoleCreateNestedOneWithoutCandidatesInput = {
+    create?: XOR<RoleCreateWithoutCandidatesInput, RoleUncheckedCreateWithoutCandidatesInput>
+    connectOrCreate?: RoleCreateOrConnectWithoutCandidatesInput
+    connect?: RoleWhereUniqueInput
+  }
+
+  export type CareerCreateNestedOneWithoutCandidatesInput = {
+    create?: XOR<CareerCreateWithoutCandidatesInput, CareerUncheckedCreateWithoutCandidatesInput>
+    connectOrCreate?: CareerCreateOrConnectWithoutCandidatesInput
+    connect?: CareerWhereUniqueInput
   }
 
   export type ElectionCreateNestedOneWithoutCandidatesInput = {
@@ -14254,10 +14752,32 @@ export namespace Prisma {
     connect?: VoteWhereUniqueInput | VoteWhereUniqueInput[]
   }
 
-  export type ElectionUpdateOneRequiredWithoutCandidatesNestedInput = {
+  export type NullableStringFieldUpdateOperationsInput = {
+    set?: string | null
+  }
+
+  export type RoleUpdateOneRequiredWithoutCandidatesNestedInput = {
+    create?: XOR<RoleCreateWithoutCandidatesInput, RoleUncheckedCreateWithoutCandidatesInput>
+    connectOrCreate?: RoleCreateOrConnectWithoutCandidatesInput
+    upsert?: RoleUpsertWithoutCandidatesInput
+    connect?: RoleWhereUniqueInput
+    update?: XOR<XOR<RoleUpdateToOneWithWhereWithoutCandidatesInput, RoleUpdateWithoutCandidatesInput>, RoleUncheckedUpdateWithoutCandidatesInput>
+  }
+
+  export type CareerUpdateOneRequiredWithoutCandidatesNestedInput = {
+    create?: XOR<CareerCreateWithoutCandidatesInput, CareerUncheckedCreateWithoutCandidatesInput>
+    connectOrCreate?: CareerCreateOrConnectWithoutCandidatesInput
+    upsert?: CareerUpsertWithoutCandidatesInput
+    connect?: CareerWhereUniqueInput
+    update?: XOR<XOR<CareerUpdateToOneWithWhereWithoutCandidatesInput, CareerUpdateWithoutCandidatesInput>, CareerUncheckedUpdateWithoutCandidatesInput>
+  }
+
+  export type ElectionUpdateOneWithoutCandidatesNestedInput = {
     create?: XOR<ElectionCreateWithoutCandidatesInput, ElectionUncheckedCreateWithoutCandidatesInput>
     connectOrCreate?: ElectionCreateOrConnectWithoutCandidatesInput
     upsert?: ElectionUpsertWithoutCandidatesInput
+    disconnect?: ElectionWhereInput | boolean
+    delete?: ElectionWhereInput | boolean
     connect?: ElectionWhereUniqueInput
     update?: XOR<XOR<ElectionUpdateToOneWithWhereWithoutCandidatesInput, ElectionUpdateWithoutCandidatesInput>, ElectionUncheckedUpdateWithoutCandidatesInput>
   }
@@ -14350,6 +14870,12 @@ export namespace Prisma {
     connect?: CandidateWhereUniqueInput
   }
 
+  export type ElectionCreateNestedOneWithoutVoteInput = {
+    create?: XOR<ElectionCreateWithoutVoteInput, ElectionUncheckedCreateWithoutVoteInput>
+    connectOrCreate?: ElectionCreateOrConnectWithoutVoteInput
+    connect?: ElectionWhereUniqueInput
+  }
+
   export type VoterUpdateOneRequiredWithoutVoteNestedInput = {
     create?: XOR<VoterCreateWithoutVoteInput, VoterUncheckedCreateWithoutVoteInput>
     connectOrCreate?: VoterCreateOrConnectWithoutVoteInput
@@ -14368,12 +14894,14 @@ export namespace Prisma {
     update?: XOR<XOR<CandidateUpdateToOneWithWhereWithoutVotesInput, CandidateUpdateWithoutVotesInput>, CandidateUncheckedUpdateWithoutVotesInput>
   }
 
-  export type NullableIntFieldUpdateOperationsInput = {
-    set?: number | null
-    increment?: number
-    decrement?: number
-    multiply?: number
-    divide?: number
+  export type ElectionUpdateOneWithoutVoteNestedInput = {
+    create?: XOR<ElectionCreateWithoutVoteInput, ElectionUncheckedCreateWithoutVoteInput>
+    connectOrCreate?: ElectionCreateOrConnectWithoutVoteInput
+    upsert?: ElectionUpsertWithoutVoteInput
+    disconnect?: ElectionWhereInput | boolean
+    delete?: ElectionWhereInput | boolean
+    connect?: ElectionWhereUniqueInput
+    update?: XOR<XOR<ElectionUpdateToOneWithWhereWithoutVoteInput, ElectionUpdateWithoutVoteInput>, ElectionUncheckedUpdateWithoutVoteInput>
   }
 
   export type CandidateCreateNestedOneWithoutProposalsInput = {
@@ -14397,11 +14925,25 @@ export namespace Prisma {
     connect?: VoterWhereUniqueInput | VoterWhereUniqueInput[]
   }
 
+  export type CandidateCreateNestedManyWithoutCareerInput = {
+    create?: XOR<CandidateCreateWithoutCareerInput, CandidateUncheckedCreateWithoutCareerInput> | CandidateCreateWithoutCareerInput[] | CandidateUncheckedCreateWithoutCareerInput[]
+    connectOrCreate?: CandidateCreateOrConnectWithoutCareerInput | CandidateCreateOrConnectWithoutCareerInput[]
+    createMany?: CandidateCreateManyCareerInputEnvelope
+    connect?: CandidateWhereUniqueInput | CandidateWhereUniqueInput[]
+  }
+
   export type VoterUncheckedCreateNestedManyWithoutCareerInput = {
     create?: XOR<VoterCreateWithoutCareerInput, VoterUncheckedCreateWithoutCareerInput> | VoterCreateWithoutCareerInput[] | VoterUncheckedCreateWithoutCareerInput[]
     connectOrCreate?: VoterCreateOrConnectWithoutCareerInput | VoterCreateOrConnectWithoutCareerInput[]
     createMany?: VoterCreateManyCareerInputEnvelope
     connect?: VoterWhereUniqueInput | VoterWhereUniqueInput[]
+  }
+
+  export type CandidateUncheckedCreateNestedManyWithoutCareerInput = {
+    create?: XOR<CandidateCreateWithoutCareerInput, CandidateUncheckedCreateWithoutCareerInput> | CandidateCreateWithoutCareerInput[] | CandidateUncheckedCreateWithoutCareerInput[]
+    connectOrCreate?: CandidateCreateOrConnectWithoutCareerInput | CandidateCreateOrConnectWithoutCareerInput[]
+    createMany?: CandidateCreateManyCareerInputEnvelope
+    connect?: CandidateWhereUniqueInput | CandidateWhereUniqueInput[]
   }
 
   export type VoterUpdateManyWithoutCareerNestedInput = {
@@ -14418,6 +14960,20 @@ export namespace Prisma {
     deleteMany?: VoterScalarWhereInput | VoterScalarWhereInput[]
   }
 
+  export type CandidateUpdateManyWithoutCareerNestedInput = {
+    create?: XOR<CandidateCreateWithoutCareerInput, CandidateUncheckedCreateWithoutCareerInput> | CandidateCreateWithoutCareerInput[] | CandidateUncheckedCreateWithoutCareerInput[]
+    connectOrCreate?: CandidateCreateOrConnectWithoutCareerInput | CandidateCreateOrConnectWithoutCareerInput[]
+    upsert?: CandidateUpsertWithWhereUniqueWithoutCareerInput | CandidateUpsertWithWhereUniqueWithoutCareerInput[]
+    createMany?: CandidateCreateManyCareerInputEnvelope
+    set?: CandidateWhereUniqueInput | CandidateWhereUniqueInput[]
+    disconnect?: CandidateWhereUniqueInput | CandidateWhereUniqueInput[]
+    delete?: CandidateWhereUniqueInput | CandidateWhereUniqueInput[]
+    connect?: CandidateWhereUniqueInput | CandidateWhereUniqueInput[]
+    update?: CandidateUpdateWithWhereUniqueWithoutCareerInput | CandidateUpdateWithWhereUniqueWithoutCareerInput[]
+    updateMany?: CandidateUpdateManyWithWhereWithoutCareerInput | CandidateUpdateManyWithWhereWithoutCareerInput[]
+    deleteMany?: CandidateScalarWhereInput | CandidateScalarWhereInput[]
+  }
+
   export type VoterUncheckedUpdateManyWithoutCareerNestedInput = {
     create?: XOR<VoterCreateWithoutCareerInput, VoterUncheckedCreateWithoutCareerInput> | VoterCreateWithoutCareerInput[] | VoterUncheckedCreateWithoutCareerInput[]
     connectOrCreate?: VoterCreateOrConnectWithoutCareerInput | VoterCreateOrConnectWithoutCareerInput[]
@@ -14430,6 +14986,20 @@ export namespace Prisma {
     update?: VoterUpdateWithWhereUniqueWithoutCareerInput | VoterUpdateWithWhereUniqueWithoutCareerInput[]
     updateMany?: VoterUpdateManyWithWhereWithoutCareerInput | VoterUpdateManyWithWhereWithoutCareerInput[]
     deleteMany?: VoterScalarWhereInput | VoterScalarWhereInput[]
+  }
+
+  export type CandidateUncheckedUpdateManyWithoutCareerNestedInput = {
+    create?: XOR<CandidateCreateWithoutCareerInput, CandidateUncheckedCreateWithoutCareerInput> | CandidateCreateWithoutCareerInput[] | CandidateUncheckedCreateWithoutCareerInput[]
+    connectOrCreate?: CandidateCreateOrConnectWithoutCareerInput | CandidateCreateOrConnectWithoutCareerInput[]
+    upsert?: CandidateUpsertWithWhereUniqueWithoutCareerInput | CandidateUpsertWithWhereUniqueWithoutCareerInput[]
+    createMany?: CandidateCreateManyCareerInputEnvelope
+    set?: CandidateWhereUniqueInput | CandidateWhereUniqueInput[]
+    disconnect?: CandidateWhereUniqueInput | CandidateWhereUniqueInput[]
+    delete?: CandidateWhereUniqueInput | CandidateWhereUniqueInput[]
+    connect?: CandidateWhereUniqueInput | CandidateWhereUniqueInput[]
+    update?: CandidateUpdateWithWhereUniqueWithoutCareerInput | CandidateUpdateWithWhereUniqueWithoutCareerInput[]
+    updateMany?: CandidateUpdateManyWithWhereWithoutCareerInput | CandidateUpdateManyWithWhereWithoutCareerInput[]
+    deleteMany?: CandidateScalarWhereInput | CandidateScalarWhereInput[]
   }
 
   export type ElectionCreateNestedOneWithoutResultInput = {
@@ -14467,11 +15037,25 @@ export namespace Prisma {
     connect?: VoterWhereUniqueInput | VoterWhereUniqueInput[]
   }
 
+  export type CandidateCreateNestedManyWithoutRoleInput = {
+    create?: XOR<CandidateCreateWithoutRoleInput, CandidateUncheckedCreateWithoutRoleInput> | CandidateCreateWithoutRoleInput[] | CandidateUncheckedCreateWithoutRoleInput[]
+    connectOrCreate?: CandidateCreateOrConnectWithoutRoleInput | CandidateCreateOrConnectWithoutRoleInput[]
+    createMany?: CandidateCreateManyRoleInputEnvelope
+    connect?: CandidateWhereUniqueInput | CandidateWhereUniqueInput[]
+  }
+
   export type VoterUncheckedCreateNestedManyWithoutRoleInput = {
     create?: XOR<VoterCreateWithoutRoleInput, VoterUncheckedCreateWithoutRoleInput> | VoterCreateWithoutRoleInput[] | VoterUncheckedCreateWithoutRoleInput[]
     connectOrCreate?: VoterCreateOrConnectWithoutRoleInput | VoterCreateOrConnectWithoutRoleInput[]
     createMany?: VoterCreateManyRoleInputEnvelope
     connect?: VoterWhereUniqueInput | VoterWhereUniqueInput[]
+  }
+
+  export type CandidateUncheckedCreateNestedManyWithoutRoleInput = {
+    create?: XOR<CandidateCreateWithoutRoleInput, CandidateUncheckedCreateWithoutRoleInput> | CandidateCreateWithoutRoleInput[] | CandidateUncheckedCreateWithoutRoleInput[]
+    connectOrCreate?: CandidateCreateOrConnectWithoutRoleInput | CandidateCreateOrConnectWithoutRoleInput[]
+    createMany?: CandidateCreateManyRoleInputEnvelope
+    connect?: CandidateWhereUniqueInput | CandidateWhereUniqueInput[]
   }
 
   export type VoterUpdateManyWithoutRoleNestedInput = {
@@ -14488,6 +15072,20 @@ export namespace Prisma {
     deleteMany?: VoterScalarWhereInput | VoterScalarWhereInput[]
   }
 
+  export type CandidateUpdateManyWithoutRoleNestedInput = {
+    create?: XOR<CandidateCreateWithoutRoleInput, CandidateUncheckedCreateWithoutRoleInput> | CandidateCreateWithoutRoleInput[] | CandidateUncheckedCreateWithoutRoleInput[]
+    connectOrCreate?: CandidateCreateOrConnectWithoutRoleInput | CandidateCreateOrConnectWithoutRoleInput[]
+    upsert?: CandidateUpsertWithWhereUniqueWithoutRoleInput | CandidateUpsertWithWhereUniqueWithoutRoleInput[]
+    createMany?: CandidateCreateManyRoleInputEnvelope
+    set?: CandidateWhereUniqueInput | CandidateWhereUniqueInput[]
+    disconnect?: CandidateWhereUniqueInput | CandidateWhereUniqueInput[]
+    delete?: CandidateWhereUniqueInput | CandidateWhereUniqueInput[]
+    connect?: CandidateWhereUniqueInput | CandidateWhereUniqueInput[]
+    update?: CandidateUpdateWithWhereUniqueWithoutRoleInput | CandidateUpdateWithWhereUniqueWithoutRoleInput[]
+    updateMany?: CandidateUpdateManyWithWhereWithoutRoleInput | CandidateUpdateManyWithWhereWithoutRoleInput[]
+    deleteMany?: CandidateScalarWhereInput | CandidateScalarWhereInput[]
+  }
+
   export type VoterUncheckedUpdateManyWithoutRoleNestedInput = {
     create?: XOR<VoterCreateWithoutRoleInput, VoterUncheckedCreateWithoutRoleInput> | VoterCreateWithoutRoleInput[] | VoterUncheckedCreateWithoutRoleInput[]
     connectOrCreate?: VoterCreateOrConnectWithoutRoleInput | VoterCreateOrConnectWithoutRoleInput[]
@@ -14500,6 +15098,20 @@ export namespace Prisma {
     update?: VoterUpdateWithWhereUniqueWithoutRoleInput | VoterUpdateWithWhereUniqueWithoutRoleInput[]
     updateMany?: VoterUpdateManyWithWhereWithoutRoleInput | VoterUpdateManyWithWhereWithoutRoleInput[]
     deleteMany?: VoterScalarWhereInput | VoterScalarWhereInput[]
+  }
+
+  export type CandidateUncheckedUpdateManyWithoutRoleNestedInput = {
+    create?: XOR<CandidateCreateWithoutRoleInput, CandidateUncheckedCreateWithoutRoleInput> | CandidateCreateWithoutRoleInput[] | CandidateUncheckedCreateWithoutRoleInput[]
+    connectOrCreate?: CandidateCreateOrConnectWithoutRoleInput | CandidateCreateOrConnectWithoutRoleInput[]
+    upsert?: CandidateUpsertWithWhereUniqueWithoutRoleInput | CandidateUpsertWithWhereUniqueWithoutRoleInput[]
+    createMany?: CandidateCreateManyRoleInputEnvelope
+    set?: CandidateWhereUniqueInput | CandidateWhereUniqueInput[]
+    disconnect?: CandidateWhereUniqueInput | CandidateWhereUniqueInput[]
+    delete?: CandidateWhereUniqueInput | CandidateWhereUniqueInput[]
+    connect?: CandidateWhereUniqueInput | CandidateWhereUniqueInput[]
+    update?: CandidateUpdateWithWhereUniqueWithoutRoleInput | CandidateUpdateWithWhereUniqueWithoutRoleInput[]
+    updateMany?: CandidateUpdateManyWithWhereWithoutRoleInput | CandidateUpdateManyWithWhereWithoutRoleInput[]
+    deleteMany?: CandidateScalarWhereInput | CandidateScalarWhereInput[]
   }
 
   export type NestedIntFilter<$PrismaModel = never> = {
@@ -14598,31 +15210,6 @@ export namespace Prisma {
     _max?: NestedBigIntFilter<$PrismaModel>
   }
 
-  export type NestedDateTimeFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
-  }
-
-  export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedDateTimeFilter<$PrismaModel>
-    _max?: NestedDateTimeFilter<$PrismaModel>
-  }
-
   export type NestedIntNullableFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel> | null
     in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
@@ -14661,6 +15248,62 @@ export namespace Prisma {
     not?: NestedFloatNullableFilter<$PrismaModel> | number | null
   }
 
+  export type NestedDateTimeFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+  }
+
+  export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
+  export type NestedStringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  }
+
+  export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
+  }
+
   export type ElectionCreateWithoutAdministradorInput = {
     nombre_election: string
     fecha_inicio: Date | string
@@ -14669,6 +15312,7 @@ export namespace Prisma {
     candidates?: CandidateCreateNestedManyWithoutElectionInput
     voters?: VoterCreateNestedManyWithoutElectionInput
     result?: ResultCreateNestedOneWithoutElectionInput
+    Vote?: VoteCreateNestedManyWithoutElectionInput
   }
 
   export type ElectionUncheckedCreateWithoutAdministradorInput = {
@@ -14680,6 +15324,7 @@ export namespace Prisma {
     candidates?: CandidateUncheckedCreateNestedManyWithoutElectionInput
     voters?: VoterUncheckedCreateNestedManyWithoutElectionInput
     result?: ResultUncheckedCreateNestedOneWithoutElectionInput
+    Vote?: VoteUncheckedCreateNestedManyWithoutElectionInput
   }
 
   export type ElectionCreateOrConnectWithoutAdministradorInput = {
@@ -14722,11 +15367,13 @@ export namespace Prisma {
 
   export type RoleCreateWithoutVotersInput = {
     nombre_role: string
+    candidates?: CandidateCreateNestedManyWithoutRoleInput
   }
 
   export type RoleUncheckedCreateWithoutVotersInput = {
     id_role?: number
     nombre_role: string
+    candidates?: CandidateUncheckedCreateNestedManyWithoutRoleInput
   }
 
   export type RoleCreateOrConnectWithoutVotersInput = {
@@ -14742,6 +15389,7 @@ export namespace Prisma {
     administrador: AdministradorCreateNestedOneWithoutElectionsInput
     candidates?: CandidateCreateNestedManyWithoutElectionInput
     result?: ResultCreateNestedOneWithoutElectionInput
+    Vote?: VoteCreateNestedManyWithoutElectionInput
   }
 
   export type ElectionUncheckedCreateWithoutVotersInput = {
@@ -14753,6 +15401,7 @@ export namespace Prisma {
     admin_id: number
     candidates?: CandidateUncheckedCreateNestedManyWithoutElectionInput
     result?: ResultUncheckedCreateNestedOneWithoutElectionInput
+    Vote?: VoteUncheckedCreateNestedManyWithoutElectionInput
   }
 
   export type ElectionCreateOrConnectWithoutVotersInput = {
@@ -14763,12 +15412,14 @@ export namespace Prisma {
   export type CareerCreateWithoutVotersInput = {
     nombre_career: string
     facultad_career: string
+    candidates?: CandidateCreateNestedManyWithoutCareerInput
   }
 
   export type CareerUncheckedCreateWithoutVotersInput = {
     id_career?: number
     nombre_career: string
     facultad_career: string
+    candidates?: CandidateUncheckedCreateNestedManyWithoutCareerInput
   }
 
   export type CareerCreateOrConnectWithoutVotersInput = {
@@ -14780,6 +15431,7 @@ export namespace Prisma {
     fecha_vote: Date | string
     hora_vote: Date | string
     candidate?: CandidateCreateNestedOneWithoutVotesInput
+    election?: ElectionCreateNestedOneWithoutVoteInput
   }
 
   export type VoteUncheckedCreateWithoutVoterInput = {
@@ -14787,11 +15439,17 @@ export namespace Prisma {
     fecha_vote: Date | string
     hora_vote: Date | string
     candidateId?: number | null
+    electionId?: number | null
   }
 
   export type VoteCreateOrConnectWithoutVoterInput = {
     where: VoteWhereUniqueInput
     create: XOR<VoteCreateWithoutVoterInput, VoteUncheckedCreateWithoutVoterInput>
+  }
+
+  export type VoteCreateManyVoterInputEnvelope = {
+    data: VoteCreateManyVoterInput | VoteCreateManyVoterInput[]
+    skipDuplicates?: boolean
   }
 
   export type RoleUpsertWithoutVotersInput = {
@@ -14807,11 +15465,13 @@ export namespace Prisma {
 
   export type RoleUpdateWithoutVotersInput = {
     nombre_role?: StringFieldUpdateOperationsInput | string
+    candidates?: CandidateUpdateManyWithoutRoleNestedInput
   }
 
   export type RoleUncheckedUpdateWithoutVotersInput = {
     id_role?: IntFieldUpdateOperationsInput | number
     nombre_role?: StringFieldUpdateOperationsInput | string
+    candidates?: CandidateUncheckedUpdateManyWithoutRoleNestedInput
   }
 
   export type ElectionUpsertWithoutVotersInput = {
@@ -14833,6 +15493,7 @@ export namespace Prisma {
     administrador?: AdministradorUpdateOneRequiredWithoutElectionsNestedInput
     candidates?: CandidateUpdateManyWithoutElectionNestedInput
     result?: ResultUpdateOneWithoutElectionNestedInput
+    Vote?: VoteUpdateManyWithoutElectionNestedInput
   }
 
   export type ElectionUncheckedUpdateWithoutVotersInput = {
@@ -14844,6 +15505,7 @@ export namespace Prisma {
     admin_id?: IntFieldUpdateOperationsInput | number
     candidates?: CandidateUncheckedUpdateManyWithoutElectionNestedInput
     result?: ResultUncheckedUpdateOneWithoutElectionNestedInput
+    Vote?: VoteUncheckedUpdateManyWithoutElectionNestedInput
   }
 
   export type CareerUpsertWithoutVotersInput = {
@@ -14860,36 +15522,42 @@ export namespace Prisma {
   export type CareerUpdateWithoutVotersInput = {
     nombre_career?: StringFieldUpdateOperationsInput | string
     facultad_career?: StringFieldUpdateOperationsInput | string
+    candidates?: CandidateUpdateManyWithoutCareerNestedInput
   }
 
   export type CareerUncheckedUpdateWithoutVotersInput = {
     id_career?: IntFieldUpdateOperationsInput | number
     nombre_career?: StringFieldUpdateOperationsInput | string
     facultad_career?: StringFieldUpdateOperationsInput | string
+    candidates?: CandidateUncheckedUpdateManyWithoutCareerNestedInput
   }
 
-  export type VoteUpsertWithoutVoterInput = {
+  export type VoteUpsertWithWhereUniqueWithoutVoterInput = {
+    where: VoteWhereUniqueInput
     update: XOR<VoteUpdateWithoutVoterInput, VoteUncheckedUpdateWithoutVoterInput>
     create: XOR<VoteCreateWithoutVoterInput, VoteUncheckedCreateWithoutVoterInput>
-    where?: VoteWhereInput
   }
 
-  export type VoteUpdateToOneWithWhereWithoutVoterInput = {
-    where?: VoteWhereInput
+  export type VoteUpdateWithWhereUniqueWithoutVoterInput = {
+    where: VoteWhereUniqueInput
     data: XOR<VoteUpdateWithoutVoterInput, VoteUncheckedUpdateWithoutVoterInput>
   }
 
-  export type VoteUpdateWithoutVoterInput = {
-    fecha_vote?: DateTimeFieldUpdateOperationsInput | Date | string
-    hora_vote?: DateTimeFieldUpdateOperationsInput | Date | string
-    candidate?: CandidateUpdateOneWithoutVotesNestedInput
+  export type VoteUpdateManyWithWhereWithoutVoterInput = {
+    where: VoteScalarWhereInput
+    data: XOR<VoteUpdateManyMutationInput, VoteUncheckedUpdateManyWithoutVoterInput>
   }
 
-  export type VoteUncheckedUpdateWithoutVoterInput = {
-    id_vote?: IntFieldUpdateOperationsInput | number
-    fecha_vote?: DateTimeFieldUpdateOperationsInput | Date | string
-    hora_vote?: DateTimeFieldUpdateOperationsInput | Date | string
-    candidateId?: NullableIntFieldUpdateOperationsInput | number | null
+  export type VoteScalarWhereInput = {
+    AND?: VoteScalarWhereInput | VoteScalarWhereInput[]
+    OR?: VoteScalarWhereInput[]
+    NOT?: VoteScalarWhereInput | VoteScalarWhereInput[]
+    id_vote?: IntFilter<"Vote"> | number
+    fecha_vote?: DateTimeFilter<"Vote"> | Date | string
+    hora_vote?: DateTimeFilter<"Vote"> | Date | string
+    voterId?: IntFilter<"Vote"> | number
+    candidateId?: IntNullableFilter<"Vote"> | number | null
+    electionId?: IntNullableFilter<"Vote"> | number | null
   }
 
   export type AdministradorCreateWithoutElectionsInput = {
@@ -14923,7 +15591,10 @@ export namespace Prisma {
     num_doc_candidate: bigint | number
     correo_candidate: string
     estado_candidate: string
-    foto_candidate: string
+    foto_candidate?: string | null
+    contrasena_candidate: string
+    role: RoleCreateNestedOneWithoutCandidatesInput
+    career: CareerCreateNestedOneWithoutCandidatesInput
     proposals?: ProposalCreateNestedManyWithoutCandidateInput
     result?: ResultCreateNestedOneWithoutCandidateInput
     votes?: VoteCreateNestedManyWithoutCandidateInput
@@ -14937,7 +15608,10 @@ export namespace Prisma {
     num_doc_candidate: bigint | number
     correo_candidate: string
     estado_candidate: string
-    foto_candidate: string
+    foto_candidate?: string | null
+    contrasena_candidate: string
+    roleId: number
+    careerId: number
     proposals?: ProposalUncheckedCreateNestedManyWithoutCandidateInput
     result?: ResultUncheckedCreateNestedOneWithoutCandidateInput
     votes?: VoteUncheckedCreateNestedManyWithoutCandidateInput
@@ -14963,7 +15637,7 @@ export namespace Prisma {
     contrasena_voter: string
     role: RoleCreateNestedOneWithoutVotersInput
     career: CareerCreateNestedOneWithoutVotersInput
-    vote?: VoteCreateNestedOneWithoutVoterInput
+    vote?: VoteCreateNestedManyWithoutVoterInput
   }
 
   export type VoterUncheckedCreateWithoutElectionInput = {
@@ -14977,7 +15651,7 @@ export namespace Prisma {
     contrasena_voter: string
     roleId: number
     careerId: number
-    vote?: VoteUncheckedCreateNestedOneWithoutVoterInput
+    vote?: VoteUncheckedCreateNestedManyWithoutVoterInput
   }
 
   export type VoterCreateOrConnectWithoutElectionInput = {
@@ -15004,6 +15678,31 @@ export namespace Prisma {
   export type ResultCreateOrConnectWithoutElectionInput = {
     where: ResultWhereUniqueInput
     create: XOR<ResultCreateWithoutElectionInput, ResultUncheckedCreateWithoutElectionInput>
+  }
+
+  export type VoteCreateWithoutElectionInput = {
+    fecha_vote: Date | string
+    hora_vote: Date | string
+    voter: VoterCreateNestedOneWithoutVoteInput
+    candidate?: CandidateCreateNestedOneWithoutVotesInput
+  }
+
+  export type VoteUncheckedCreateWithoutElectionInput = {
+    id_vote?: number
+    fecha_vote: Date | string
+    hora_vote: Date | string
+    voterId: number
+    candidateId?: number | null
+  }
+
+  export type VoteCreateOrConnectWithoutElectionInput = {
+    where: VoteWhereUniqueInput
+    create: XOR<VoteCreateWithoutElectionInput, VoteUncheckedCreateWithoutElectionInput>
+  }
+
+  export type VoteCreateManyElectionInputEnvelope = {
+    data: VoteCreateManyElectionInput | VoteCreateManyElectionInput[]
+    skipDuplicates?: boolean
   }
 
   export type AdministradorUpsertWithoutElectionsInput = {
@@ -15063,8 +15762,11 @@ export namespace Prisma {
     num_doc_candidate?: BigIntFilter<"Candidate"> | bigint | number
     correo_candidate?: StringFilter<"Candidate"> | string
     estado_candidate?: StringFilter<"Candidate"> | string
-    foto_candidate?: StringFilter<"Candidate"> | string
-    electionId?: IntFilter<"Candidate"> | number
+    foto_candidate?: StringNullableFilter<"Candidate"> | string | null
+    contrasena_candidate?: StringFilter<"Candidate"> | string
+    roleId?: IntFilter<"Candidate"> | number
+    careerId?: IntFilter<"Candidate"> | number
+    electionId?: IntNullableFilter<"Candidate"> | number | null
   }
 
   export type VoterUpsertWithWhereUniqueWithoutElectionInput = {
@@ -15096,7 +15798,7 @@ export namespace Prisma {
     estado_voter?: StringFilter<"Voter"> | string
     contrasena_voter?: StringFilter<"Voter"> | string
     roleId?: IntFilter<"Voter"> | number
-    electionId?: IntFilter<"Voter"> | number
+    electionId?: IntNullableFilter<"Voter"> | number | null
     careerId?: IntFilter<"Voter"> | number
   }
 
@@ -15122,6 +15824,56 @@ export namespace Prisma {
     candidateId?: IntFieldUpdateOperationsInput | number
   }
 
+  export type VoteUpsertWithWhereUniqueWithoutElectionInput = {
+    where: VoteWhereUniqueInput
+    update: XOR<VoteUpdateWithoutElectionInput, VoteUncheckedUpdateWithoutElectionInput>
+    create: XOR<VoteCreateWithoutElectionInput, VoteUncheckedCreateWithoutElectionInput>
+  }
+
+  export type VoteUpdateWithWhereUniqueWithoutElectionInput = {
+    where: VoteWhereUniqueInput
+    data: XOR<VoteUpdateWithoutElectionInput, VoteUncheckedUpdateWithoutElectionInput>
+  }
+
+  export type VoteUpdateManyWithWhereWithoutElectionInput = {
+    where: VoteScalarWhereInput
+    data: XOR<VoteUpdateManyMutationInput, VoteUncheckedUpdateManyWithoutElectionInput>
+  }
+
+  export type RoleCreateWithoutCandidatesInput = {
+    nombre_role: string
+    voters?: VoterCreateNestedManyWithoutRoleInput
+  }
+
+  export type RoleUncheckedCreateWithoutCandidatesInput = {
+    id_role?: number
+    nombre_role: string
+    voters?: VoterUncheckedCreateNestedManyWithoutRoleInput
+  }
+
+  export type RoleCreateOrConnectWithoutCandidatesInput = {
+    where: RoleWhereUniqueInput
+    create: XOR<RoleCreateWithoutCandidatesInput, RoleUncheckedCreateWithoutCandidatesInput>
+  }
+
+  export type CareerCreateWithoutCandidatesInput = {
+    nombre_career: string
+    facultad_career: string
+    voters?: VoterCreateNestedManyWithoutCareerInput
+  }
+
+  export type CareerUncheckedCreateWithoutCandidatesInput = {
+    id_career?: number
+    nombre_career: string
+    facultad_career: string
+    voters?: VoterUncheckedCreateNestedManyWithoutCareerInput
+  }
+
+  export type CareerCreateOrConnectWithoutCandidatesInput = {
+    where: CareerWhereUniqueInput
+    create: XOR<CareerCreateWithoutCandidatesInput, CareerUncheckedCreateWithoutCandidatesInput>
+  }
+
   export type ElectionCreateWithoutCandidatesInput = {
     nombre_election: string
     fecha_inicio: Date | string
@@ -15130,6 +15882,7 @@ export namespace Prisma {
     administrador: AdministradorCreateNestedOneWithoutElectionsInput
     voters?: VoterCreateNestedManyWithoutElectionInput
     result?: ResultCreateNestedOneWithoutElectionInput
+    Vote?: VoteCreateNestedManyWithoutElectionInput
   }
 
   export type ElectionUncheckedCreateWithoutCandidatesInput = {
@@ -15141,6 +15894,7 @@ export namespace Prisma {
     admin_id: number
     voters?: VoterUncheckedCreateNestedManyWithoutElectionInput
     result?: ResultUncheckedCreateNestedOneWithoutElectionInput
+    Vote?: VoteUncheckedCreateNestedManyWithoutElectionInput
   }
 
   export type ElectionCreateOrConnectWithoutCandidatesInput = {
@@ -15191,6 +15945,7 @@ export namespace Prisma {
     fecha_vote: Date | string
     hora_vote: Date | string
     voter: VoterCreateNestedOneWithoutVoteInput
+    election?: ElectionCreateNestedOneWithoutVoteInput
   }
 
   export type VoteUncheckedCreateWithoutCandidateInput = {
@@ -15198,6 +15953,7 @@ export namespace Prisma {
     fecha_vote: Date | string
     hora_vote: Date | string
     voterId: number
+    electionId?: number | null
   }
 
   export type VoteCreateOrConnectWithoutCandidateInput = {
@@ -15208,6 +15964,52 @@ export namespace Prisma {
   export type VoteCreateManyCandidateInputEnvelope = {
     data: VoteCreateManyCandidateInput | VoteCreateManyCandidateInput[]
     skipDuplicates?: boolean
+  }
+
+  export type RoleUpsertWithoutCandidatesInput = {
+    update: XOR<RoleUpdateWithoutCandidatesInput, RoleUncheckedUpdateWithoutCandidatesInput>
+    create: XOR<RoleCreateWithoutCandidatesInput, RoleUncheckedCreateWithoutCandidatesInput>
+    where?: RoleWhereInput
+  }
+
+  export type RoleUpdateToOneWithWhereWithoutCandidatesInput = {
+    where?: RoleWhereInput
+    data: XOR<RoleUpdateWithoutCandidatesInput, RoleUncheckedUpdateWithoutCandidatesInput>
+  }
+
+  export type RoleUpdateWithoutCandidatesInput = {
+    nombre_role?: StringFieldUpdateOperationsInput | string
+    voters?: VoterUpdateManyWithoutRoleNestedInput
+  }
+
+  export type RoleUncheckedUpdateWithoutCandidatesInput = {
+    id_role?: IntFieldUpdateOperationsInput | number
+    nombre_role?: StringFieldUpdateOperationsInput | string
+    voters?: VoterUncheckedUpdateManyWithoutRoleNestedInput
+  }
+
+  export type CareerUpsertWithoutCandidatesInput = {
+    update: XOR<CareerUpdateWithoutCandidatesInput, CareerUncheckedUpdateWithoutCandidatesInput>
+    create: XOR<CareerCreateWithoutCandidatesInput, CareerUncheckedCreateWithoutCandidatesInput>
+    where?: CareerWhereInput
+  }
+
+  export type CareerUpdateToOneWithWhereWithoutCandidatesInput = {
+    where?: CareerWhereInput
+    data: XOR<CareerUpdateWithoutCandidatesInput, CareerUncheckedUpdateWithoutCandidatesInput>
+  }
+
+  export type CareerUpdateWithoutCandidatesInput = {
+    nombre_career?: StringFieldUpdateOperationsInput | string
+    facultad_career?: StringFieldUpdateOperationsInput | string
+    voters?: VoterUpdateManyWithoutCareerNestedInput
+  }
+
+  export type CareerUncheckedUpdateWithoutCandidatesInput = {
+    id_career?: IntFieldUpdateOperationsInput | number
+    nombre_career?: StringFieldUpdateOperationsInput | string
+    facultad_career?: StringFieldUpdateOperationsInput | string
+    voters?: VoterUncheckedUpdateManyWithoutCareerNestedInput
   }
 
   export type ElectionUpsertWithoutCandidatesInput = {
@@ -15229,6 +16031,7 @@ export namespace Prisma {
     administrador?: AdministradorUpdateOneRequiredWithoutElectionsNestedInput
     voters?: VoterUpdateManyWithoutElectionNestedInput
     result?: ResultUpdateOneWithoutElectionNestedInput
+    Vote?: VoteUpdateManyWithoutElectionNestedInput
   }
 
   export type ElectionUncheckedUpdateWithoutCandidatesInput = {
@@ -15240,6 +16043,7 @@ export namespace Prisma {
     admin_id?: IntFieldUpdateOperationsInput | number
     voters?: VoterUncheckedUpdateManyWithoutElectionNestedInput
     result?: ResultUncheckedUpdateOneWithoutElectionNestedInput
+    Vote?: VoteUncheckedUpdateManyWithoutElectionNestedInput
   }
 
   export type ProposalUpsertWithWhereUniqueWithoutCandidateInput = {
@@ -15307,17 +16111,6 @@ export namespace Prisma {
     data: XOR<VoteUpdateManyMutationInput, VoteUncheckedUpdateManyWithoutCandidateInput>
   }
 
-  export type VoteScalarWhereInput = {
-    AND?: VoteScalarWhereInput | VoteScalarWhereInput[]
-    OR?: VoteScalarWhereInput[]
-    NOT?: VoteScalarWhereInput | VoteScalarWhereInput[]
-    id_vote?: IntFilter<"Vote"> | number
-    fecha_vote?: DateTimeFilter<"Vote"> | Date | string
-    hora_vote?: DateTimeFilter<"Vote"> | Date | string
-    voterId?: IntFilter<"Vote"> | number
-    candidateId?: IntNullableFilter<"Vote"> | number | null
-  }
-
   export type VoterCreateWithoutVoteInput = {
     nombre_voter: string
     apellido_voter: string
@@ -15327,7 +16120,7 @@ export namespace Prisma {
     estado_voter: string
     contrasena_voter: string
     role: RoleCreateNestedOneWithoutVotersInput
-    election: ElectionCreateNestedOneWithoutVotersInput
+    election?: ElectionCreateNestedOneWithoutVotersInput
     career: CareerCreateNestedOneWithoutVotersInput
   }
 
@@ -15341,7 +16134,7 @@ export namespace Prisma {
     estado_voter: string
     contrasena_voter: string
     roleId: number
-    electionId: number
+    electionId?: number | null
     careerId: number
   }
 
@@ -15357,8 +16150,11 @@ export namespace Prisma {
     num_doc_candidate: bigint | number
     correo_candidate: string
     estado_candidate: string
-    foto_candidate: string
-    election: ElectionCreateNestedOneWithoutCandidatesInput
+    foto_candidate?: string | null
+    contrasena_candidate: string
+    role: RoleCreateNestedOneWithoutCandidatesInput
+    career: CareerCreateNestedOneWithoutCandidatesInput
+    election?: ElectionCreateNestedOneWithoutCandidatesInput
     proposals?: ProposalCreateNestedManyWithoutCandidateInput
     result?: ResultCreateNestedOneWithoutCandidateInput
   }
@@ -15371,8 +16167,11 @@ export namespace Prisma {
     num_doc_candidate: bigint | number
     correo_candidate: string
     estado_candidate: string
-    foto_candidate: string
-    electionId: number
+    foto_candidate?: string | null
+    contrasena_candidate: string
+    roleId: number
+    careerId: number
+    electionId?: number | null
     proposals?: ProposalUncheckedCreateNestedManyWithoutCandidateInput
     result?: ResultUncheckedCreateNestedOneWithoutCandidateInput
   }
@@ -15380,6 +16179,34 @@ export namespace Prisma {
   export type CandidateCreateOrConnectWithoutVotesInput = {
     where: CandidateWhereUniqueInput
     create: XOR<CandidateCreateWithoutVotesInput, CandidateUncheckedCreateWithoutVotesInput>
+  }
+
+  export type ElectionCreateWithoutVoteInput = {
+    nombre_election: string
+    fecha_inicio: Date | string
+    fecha_fin: Date | string
+    estado_election: string
+    administrador: AdministradorCreateNestedOneWithoutElectionsInput
+    candidates?: CandidateCreateNestedManyWithoutElectionInput
+    voters?: VoterCreateNestedManyWithoutElectionInput
+    result?: ResultCreateNestedOneWithoutElectionInput
+  }
+
+  export type ElectionUncheckedCreateWithoutVoteInput = {
+    id_election?: number
+    nombre_election: string
+    fecha_inicio: Date | string
+    fecha_fin: Date | string
+    estado_election: string
+    admin_id: number
+    candidates?: CandidateUncheckedCreateNestedManyWithoutElectionInput
+    voters?: VoterUncheckedCreateNestedManyWithoutElectionInput
+    result?: ResultUncheckedCreateNestedOneWithoutElectionInput
+  }
+
+  export type ElectionCreateOrConnectWithoutVoteInput = {
+    where: ElectionWhereUniqueInput
+    create: XOR<ElectionCreateWithoutVoteInput, ElectionUncheckedCreateWithoutVoteInput>
   }
 
   export type VoterUpsertWithoutVoteInput = {
@@ -15402,7 +16229,7 @@ export namespace Prisma {
     estado_voter?: StringFieldUpdateOperationsInput | string
     contrasena_voter?: StringFieldUpdateOperationsInput | string
     role?: RoleUpdateOneRequiredWithoutVotersNestedInput
-    election?: ElectionUpdateOneRequiredWithoutVotersNestedInput
+    election?: ElectionUpdateOneWithoutVotersNestedInput
     career?: CareerUpdateOneRequiredWithoutVotersNestedInput
   }
 
@@ -15416,7 +16243,7 @@ export namespace Prisma {
     estado_voter?: StringFieldUpdateOperationsInput | string
     contrasena_voter?: StringFieldUpdateOperationsInput | string
     roleId?: IntFieldUpdateOperationsInput | number
-    electionId?: IntFieldUpdateOperationsInput | number
+    electionId?: NullableIntFieldUpdateOperationsInput | number | null
     careerId?: IntFieldUpdateOperationsInput | number
   }
 
@@ -15438,8 +16265,11 @@ export namespace Prisma {
     num_doc_candidate?: BigIntFieldUpdateOperationsInput | bigint | number
     correo_candidate?: StringFieldUpdateOperationsInput | string
     estado_candidate?: StringFieldUpdateOperationsInput | string
-    foto_candidate?: StringFieldUpdateOperationsInput | string
-    election?: ElectionUpdateOneRequiredWithoutCandidatesNestedInput
+    foto_candidate?: NullableStringFieldUpdateOperationsInput | string | null
+    contrasena_candidate?: StringFieldUpdateOperationsInput | string
+    role?: RoleUpdateOneRequiredWithoutCandidatesNestedInput
+    career?: CareerUpdateOneRequiredWithoutCandidatesNestedInput
+    election?: ElectionUpdateOneWithoutCandidatesNestedInput
     proposals?: ProposalUpdateManyWithoutCandidateNestedInput
     result?: ResultUpdateOneWithoutCandidateNestedInput
   }
@@ -15452,10 +16282,47 @@ export namespace Prisma {
     num_doc_candidate?: BigIntFieldUpdateOperationsInput | bigint | number
     correo_candidate?: StringFieldUpdateOperationsInput | string
     estado_candidate?: StringFieldUpdateOperationsInput | string
-    foto_candidate?: StringFieldUpdateOperationsInput | string
-    electionId?: IntFieldUpdateOperationsInput | number
+    foto_candidate?: NullableStringFieldUpdateOperationsInput | string | null
+    contrasena_candidate?: StringFieldUpdateOperationsInput | string
+    roleId?: IntFieldUpdateOperationsInput | number
+    careerId?: IntFieldUpdateOperationsInput | number
+    electionId?: NullableIntFieldUpdateOperationsInput | number | null
     proposals?: ProposalUncheckedUpdateManyWithoutCandidateNestedInput
     result?: ResultUncheckedUpdateOneWithoutCandidateNestedInput
+  }
+
+  export type ElectionUpsertWithoutVoteInput = {
+    update: XOR<ElectionUpdateWithoutVoteInput, ElectionUncheckedUpdateWithoutVoteInput>
+    create: XOR<ElectionCreateWithoutVoteInput, ElectionUncheckedCreateWithoutVoteInput>
+    where?: ElectionWhereInput
+  }
+
+  export type ElectionUpdateToOneWithWhereWithoutVoteInput = {
+    where?: ElectionWhereInput
+    data: XOR<ElectionUpdateWithoutVoteInput, ElectionUncheckedUpdateWithoutVoteInput>
+  }
+
+  export type ElectionUpdateWithoutVoteInput = {
+    nombre_election?: StringFieldUpdateOperationsInput | string
+    fecha_inicio?: DateTimeFieldUpdateOperationsInput | Date | string
+    fecha_fin?: DateTimeFieldUpdateOperationsInput | Date | string
+    estado_election?: StringFieldUpdateOperationsInput | string
+    administrador?: AdministradorUpdateOneRequiredWithoutElectionsNestedInput
+    candidates?: CandidateUpdateManyWithoutElectionNestedInput
+    voters?: VoterUpdateManyWithoutElectionNestedInput
+    result?: ResultUpdateOneWithoutElectionNestedInput
+  }
+
+  export type ElectionUncheckedUpdateWithoutVoteInput = {
+    id_election?: IntFieldUpdateOperationsInput | number
+    nombre_election?: StringFieldUpdateOperationsInput | string
+    fecha_inicio?: DateTimeFieldUpdateOperationsInput | Date | string
+    fecha_fin?: DateTimeFieldUpdateOperationsInput | Date | string
+    estado_election?: StringFieldUpdateOperationsInput | string
+    admin_id?: IntFieldUpdateOperationsInput | number
+    candidates?: CandidateUncheckedUpdateManyWithoutElectionNestedInput
+    voters?: VoterUncheckedUpdateManyWithoutElectionNestedInput
+    result?: ResultUncheckedUpdateOneWithoutElectionNestedInput
   }
 
   export type CandidateCreateWithoutProposalsInput = {
@@ -15465,8 +16332,11 @@ export namespace Prisma {
     num_doc_candidate: bigint | number
     correo_candidate: string
     estado_candidate: string
-    foto_candidate: string
-    election: ElectionCreateNestedOneWithoutCandidatesInput
+    foto_candidate?: string | null
+    contrasena_candidate: string
+    role: RoleCreateNestedOneWithoutCandidatesInput
+    career: CareerCreateNestedOneWithoutCandidatesInput
+    election?: ElectionCreateNestedOneWithoutCandidatesInput
     result?: ResultCreateNestedOneWithoutCandidateInput
     votes?: VoteCreateNestedManyWithoutCandidateInput
   }
@@ -15479,8 +16349,11 @@ export namespace Prisma {
     num_doc_candidate: bigint | number
     correo_candidate: string
     estado_candidate: string
-    foto_candidate: string
-    electionId: number
+    foto_candidate?: string | null
+    contrasena_candidate: string
+    roleId: number
+    careerId: number
+    electionId?: number | null
     result?: ResultUncheckedCreateNestedOneWithoutCandidateInput
     votes?: VoteUncheckedCreateNestedManyWithoutCandidateInput
   }
@@ -15508,8 +16381,11 @@ export namespace Prisma {
     num_doc_candidate?: BigIntFieldUpdateOperationsInput | bigint | number
     correo_candidate?: StringFieldUpdateOperationsInput | string
     estado_candidate?: StringFieldUpdateOperationsInput | string
-    foto_candidate?: StringFieldUpdateOperationsInput | string
-    election?: ElectionUpdateOneRequiredWithoutCandidatesNestedInput
+    foto_candidate?: NullableStringFieldUpdateOperationsInput | string | null
+    contrasena_candidate?: StringFieldUpdateOperationsInput | string
+    role?: RoleUpdateOneRequiredWithoutCandidatesNestedInput
+    career?: CareerUpdateOneRequiredWithoutCandidatesNestedInput
+    election?: ElectionUpdateOneWithoutCandidatesNestedInput
     result?: ResultUpdateOneWithoutCandidateNestedInput
     votes?: VoteUpdateManyWithoutCandidateNestedInput
   }
@@ -15522,8 +16398,11 @@ export namespace Prisma {
     num_doc_candidate?: BigIntFieldUpdateOperationsInput | bigint | number
     correo_candidate?: StringFieldUpdateOperationsInput | string
     estado_candidate?: StringFieldUpdateOperationsInput | string
-    foto_candidate?: StringFieldUpdateOperationsInput | string
-    electionId?: IntFieldUpdateOperationsInput | number
+    foto_candidate?: NullableStringFieldUpdateOperationsInput | string | null
+    contrasena_candidate?: StringFieldUpdateOperationsInput | string
+    roleId?: IntFieldUpdateOperationsInput | number
+    careerId?: IntFieldUpdateOperationsInput | number
+    electionId?: NullableIntFieldUpdateOperationsInput | number | null
     result?: ResultUncheckedUpdateOneWithoutCandidateNestedInput
     votes?: VoteUncheckedUpdateManyWithoutCandidateNestedInput
   }
@@ -15537,8 +16416,8 @@ export namespace Prisma {
     estado_voter: string
     contrasena_voter: string
     role: RoleCreateNestedOneWithoutVotersInput
-    election: ElectionCreateNestedOneWithoutVotersInput
-    vote?: VoteCreateNestedOneWithoutVoterInput
+    election?: ElectionCreateNestedOneWithoutVotersInput
+    vote?: VoteCreateNestedManyWithoutVoterInput
   }
 
   export type VoterUncheckedCreateWithoutCareerInput = {
@@ -15551,8 +16430,8 @@ export namespace Prisma {
     estado_voter: string
     contrasena_voter: string
     roleId: number
-    electionId: number
-    vote?: VoteUncheckedCreateNestedOneWithoutVoterInput
+    electionId?: number | null
+    vote?: VoteUncheckedCreateNestedManyWithoutVoterInput
   }
 
   export type VoterCreateOrConnectWithoutCareerInput = {
@@ -15562,6 +16441,49 @@ export namespace Prisma {
 
   export type VoterCreateManyCareerInputEnvelope = {
     data: VoterCreateManyCareerInput | VoterCreateManyCareerInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type CandidateCreateWithoutCareerInput = {
+    nombre_candidate: string
+    apellido_candidate: string
+    tipo_doc_candidate: string
+    num_doc_candidate: bigint | number
+    correo_candidate: string
+    estado_candidate: string
+    foto_candidate?: string | null
+    contrasena_candidate: string
+    role: RoleCreateNestedOneWithoutCandidatesInput
+    election?: ElectionCreateNestedOneWithoutCandidatesInput
+    proposals?: ProposalCreateNestedManyWithoutCandidateInput
+    result?: ResultCreateNestedOneWithoutCandidateInput
+    votes?: VoteCreateNestedManyWithoutCandidateInput
+  }
+
+  export type CandidateUncheckedCreateWithoutCareerInput = {
+    id_candidate?: number
+    nombre_candidate: string
+    apellido_candidate: string
+    tipo_doc_candidate: string
+    num_doc_candidate: bigint | number
+    correo_candidate: string
+    estado_candidate: string
+    foto_candidate?: string | null
+    contrasena_candidate: string
+    roleId: number
+    electionId?: number | null
+    proposals?: ProposalUncheckedCreateNestedManyWithoutCandidateInput
+    result?: ResultUncheckedCreateNestedOneWithoutCandidateInput
+    votes?: VoteUncheckedCreateNestedManyWithoutCandidateInput
+  }
+
+  export type CandidateCreateOrConnectWithoutCareerInput = {
+    where: CandidateWhereUniqueInput
+    create: XOR<CandidateCreateWithoutCareerInput, CandidateUncheckedCreateWithoutCareerInput>
+  }
+
+  export type CandidateCreateManyCareerInputEnvelope = {
+    data: CandidateCreateManyCareerInput | CandidateCreateManyCareerInput[]
     skipDuplicates?: boolean
   }
 
@@ -15581,6 +16503,22 @@ export namespace Prisma {
     data: XOR<VoterUpdateManyMutationInput, VoterUncheckedUpdateManyWithoutCareerInput>
   }
 
+  export type CandidateUpsertWithWhereUniqueWithoutCareerInput = {
+    where: CandidateWhereUniqueInput
+    update: XOR<CandidateUpdateWithoutCareerInput, CandidateUncheckedUpdateWithoutCareerInput>
+    create: XOR<CandidateCreateWithoutCareerInput, CandidateUncheckedCreateWithoutCareerInput>
+  }
+
+  export type CandidateUpdateWithWhereUniqueWithoutCareerInput = {
+    where: CandidateWhereUniqueInput
+    data: XOR<CandidateUpdateWithoutCareerInput, CandidateUncheckedUpdateWithoutCareerInput>
+  }
+
+  export type CandidateUpdateManyWithWhereWithoutCareerInput = {
+    where: CandidateScalarWhereInput
+    data: XOR<CandidateUpdateManyMutationInput, CandidateUncheckedUpdateManyWithoutCareerInput>
+  }
+
   export type ElectionCreateWithoutResultInput = {
     nombre_election: string
     fecha_inicio: Date | string
@@ -15589,6 +16527,7 @@ export namespace Prisma {
     administrador: AdministradorCreateNestedOneWithoutElectionsInput
     candidates?: CandidateCreateNestedManyWithoutElectionInput
     voters?: VoterCreateNestedManyWithoutElectionInput
+    Vote?: VoteCreateNestedManyWithoutElectionInput
   }
 
   export type ElectionUncheckedCreateWithoutResultInput = {
@@ -15600,6 +16539,7 @@ export namespace Prisma {
     admin_id: number
     candidates?: CandidateUncheckedCreateNestedManyWithoutElectionInput
     voters?: VoterUncheckedCreateNestedManyWithoutElectionInput
+    Vote?: VoteUncheckedCreateNestedManyWithoutElectionInput
   }
 
   export type ElectionCreateOrConnectWithoutResultInput = {
@@ -15614,8 +16554,11 @@ export namespace Prisma {
     num_doc_candidate: bigint | number
     correo_candidate: string
     estado_candidate: string
-    foto_candidate: string
-    election: ElectionCreateNestedOneWithoutCandidatesInput
+    foto_candidate?: string | null
+    contrasena_candidate: string
+    role: RoleCreateNestedOneWithoutCandidatesInput
+    career: CareerCreateNestedOneWithoutCandidatesInput
+    election?: ElectionCreateNestedOneWithoutCandidatesInput
     proposals?: ProposalCreateNestedManyWithoutCandidateInput
     votes?: VoteCreateNestedManyWithoutCandidateInput
   }
@@ -15628,8 +16571,11 @@ export namespace Prisma {
     num_doc_candidate: bigint | number
     correo_candidate: string
     estado_candidate: string
-    foto_candidate: string
-    electionId: number
+    foto_candidate?: string | null
+    contrasena_candidate: string
+    roleId: number
+    careerId: number
+    electionId?: number | null
     proposals?: ProposalUncheckedCreateNestedManyWithoutCandidateInput
     votes?: VoteUncheckedCreateNestedManyWithoutCandidateInput
   }
@@ -15658,6 +16604,7 @@ export namespace Prisma {
     administrador?: AdministradorUpdateOneRequiredWithoutElectionsNestedInput
     candidates?: CandidateUpdateManyWithoutElectionNestedInput
     voters?: VoterUpdateManyWithoutElectionNestedInput
+    Vote?: VoteUpdateManyWithoutElectionNestedInput
   }
 
   export type ElectionUncheckedUpdateWithoutResultInput = {
@@ -15669,6 +16616,7 @@ export namespace Prisma {
     admin_id?: IntFieldUpdateOperationsInput | number
     candidates?: CandidateUncheckedUpdateManyWithoutElectionNestedInput
     voters?: VoterUncheckedUpdateManyWithoutElectionNestedInput
+    Vote?: VoteUncheckedUpdateManyWithoutElectionNestedInput
   }
 
   export type CandidateUpsertWithoutResultInput = {
@@ -15689,8 +16637,11 @@ export namespace Prisma {
     num_doc_candidate?: BigIntFieldUpdateOperationsInput | bigint | number
     correo_candidate?: StringFieldUpdateOperationsInput | string
     estado_candidate?: StringFieldUpdateOperationsInput | string
-    foto_candidate?: StringFieldUpdateOperationsInput | string
-    election?: ElectionUpdateOneRequiredWithoutCandidatesNestedInput
+    foto_candidate?: NullableStringFieldUpdateOperationsInput | string | null
+    contrasena_candidate?: StringFieldUpdateOperationsInput | string
+    role?: RoleUpdateOneRequiredWithoutCandidatesNestedInput
+    career?: CareerUpdateOneRequiredWithoutCandidatesNestedInput
+    election?: ElectionUpdateOneWithoutCandidatesNestedInput
     proposals?: ProposalUpdateManyWithoutCandidateNestedInput
     votes?: VoteUpdateManyWithoutCandidateNestedInput
   }
@@ -15703,8 +16654,11 @@ export namespace Prisma {
     num_doc_candidate?: BigIntFieldUpdateOperationsInput | bigint | number
     correo_candidate?: StringFieldUpdateOperationsInput | string
     estado_candidate?: StringFieldUpdateOperationsInput | string
-    foto_candidate?: StringFieldUpdateOperationsInput | string
-    electionId?: IntFieldUpdateOperationsInput | number
+    foto_candidate?: NullableStringFieldUpdateOperationsInput | string | null
+    contrasena_candidate?: StringFieldUpdateOperationsInput | string
+    roleId?: IntFieldUpdateOperationsInput | number
+    careerId?: IntFieldUpdateOperationsInput | number
+    electionId?: NullableIntFieldUpdateOperationsInput | number | null
     proposals?: ProposalUncheckedUpdateManyWithoutCandidateNestedInput
     votes?: VoteUncheckedUpdateManyWithoutCandidateNestedInput
   }
@@ -15717,9 +16671,9 @@ export namespace Prisma {
     correo_voter: string
     estado_voter: string
     contrasena_voter: string
-    election: ElectionCreateNestedOneWithoutVotersInput
+    election?: ElectionCreateNestedOneWithoutVotersInput
     career: CareerCreateNestedOneWithoutVotersInput
-    vote?: VoteCreateNestedOneWithoutVoterInput
+    vote?: VoteCreateNestedManyWithoutVoterInput
   }
 
   export type VoterUncheckedCreateWithoutRoleInput = {
@@ -15731,9 +16685,9 @@ export namespace Prisma {
     correo_voter: string
     estado_voter: string
     contrasena_voter: string
-    electionId: number
+    electionId?: number | null
     careerId: number
-    vote?: VoteUncheckedCreateNestedOneWithoutVoterInput
+    vote?: VoteUncheckedCreateNestedManyWithoutVoterInput
   }
 
   export type VoterCreateOrConnectWithoutRoleInput = {
@@ -15743,6 +16697,49 @@ export namespace Prisma {
 
   export type VoterCreateManyRoleInputEnvelope = {
     data: VoterCreateManyRoleInput | VoterCreateManyRoleInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type CandidateCreateWithoutRoleInput = {
+    nombre_candidate: string
+    apellido_candidate: string
+    tipo_doc_candidate: string
+    num_doc_candidate: bigint | number
+    correo_candidate: string
+    estado_candidate: string
+    foto_candidate?: string | null
+    contrasena_candidate: string
+    career: CareerCreateNestedOneWithoutCandidatesInput
+    election?: ElectionCreateNestedOneWithoutCandidatesInput
+    proposals?: ProposalCreateNestedManyWithoutCandidateInput
+    result?: ResultCreateNestedOneWithoutCandidateInput
+    votes?: VoteCreateNestedManyWithoutCandidateInput
+  }
+
+  export type CandidateUncheckedCreateWithoutRoleInput = {
+    id_candidate?: number
+    nombre_candidate: string
+    apellido_candidate: string
+    tipo_doc_candidate: string
+    num_doc_candidate: bigint | number
+    correo_candidate: string
+    estado_candidate: string
+    foto_candidate?: string | null
+    contrasena_candidate: string
+    careerId: number
+    electionId?: number | null
+    proposals?: ProposalUncheckedCreateNestedManyWithoutCandidateInput
+    result?: ResultUncheckedCreateNestedOneWithoutCandidateInput
+    votes?: VoteUncheckedCreateNestedManyWithoutCandidateInput
+  }
+
+  export type CandidateCreateOrConnectWithoutRoleInput = {
+    where: CandidateWhereUniqueInput
+    create: XOR<CandidateCreateWithoutRoleInput, CandidateUncheckedCreateWithoutRoleInput>
+  }
+
+  export type CandidateCreateManyRoleInputEnvelope = {
+    data: CandidateCreateManyRoleInput | CandidateCreateManyRoleInput[]
     skipDuplicates?: boolean
   }
 
@@ -15762,6 +16759,22 @@ export namespace Prisma {
     data: XOR<VoterUpdateManyMutationInput, VoterUncheckedUpdateManyWithoutRoleInput>
   }
 
+  export type CandidateUpsertWithWhereUniqueWithoutRoleInput = {
+    where: CandidateWhereUniqueInput
+    update: XOR<CandidateUpdateWithoutRoleInput, CandidateUncheckedUpdateWithoutRoleInput>
+    create: XOR<CandidateCreateWithoutRoleInput, CandidateUncheckedCreateWithoutRoleInput>
+  }
+
+  export type CandidateUpdateWithWhereUniqueWithoutRoleInput = {
+    where: CandidateWhereUniqueInput
+    data: XOR<CandidateUpdateWithoutRoleInput, CandidateUncheckedUpdateWithoutRoleInput>
+  }
+
+  export type CandidateUpdateManyWithWhereWithoutRoleInput = {
+    where: CandidateScalarWhereInput
+    data: XOR<CandidateUpdateManyMutationInput, CandidateUncheckedUpdateManyWithoutRoleInput>
+  }
+
   export type ElectionCreateManyAdministradorInput = {
     id_election?: number
     nombre_election: string
@@ -15778,6 +16791,7 @@ export namespace Prisma {
     candidates?: CandidateUpdateManyWithoutElectionNestedInput
     voters?: VoterUpdateManyWithoutElectionNestedInput
     result?: ResultUpdateOneWithoutElectionNestedInput
+    Vote?: VoteUpdateManyWithoutElectionNestedInput
   }
 
   export type ElectionUncheckedUpdateWithoutAdministradorInput = {
@@ -15789,6 +16803,7 @@ export namespace Prisma {
     candidates?: CandidateUncheckedUpdateManyWithoutElectionNestedInput
     voters?: VoterUncheckedUpdateManyWithoutElectionNestedInput
     result?: ResultUncheckedUpdateOneWithoutElectionNestedInput
+    Vote?: VoteUncheckedUpdateManyWithoutElectionNestedInput
   }
 
   export type ElectionUncheckedUpdateManyWithoutAdministradorInput = {
@@ -15799,6 +16814,37 @@ export namespace Prisma {
     estado_election?: StringFieldUpdateOperationsInput | string
   }
 
+  export type VoteCreateManyVoterInput = {
+    id_vote?: number
+    fecha_vote: Date | string
+    hora_vote: Date | string
+    candidateId?: number | null
+    electionId?: number | null
+  }
+
+  export type VoteUpdateWithoutVoterInput = {
+    fecha_vote?: DateTimeFieldUpdateOperationsInput | Date | string
+    hora_vote?: DateTimeFieldUpdateOperationsInput | Date | string
+    candidate?: CandidateUpdateOneWithoutVotesNestedInput
+    election?: ElectionUpdateOneWithoutVoteNestedInput
+  }
+
+  export type VoteUncheckedUpdateWithoutVoterInput = {
+    id_vote?: IntFieldUpdateOperationsInput | number
+    fecha_vote?: DateTimeFieldUpdateOperationsInput | Date | string
+    hora_vote?: DateTimeFieldUpdateOperationsInput | Date | string
+    candidateId?: NullableIntFieldUpdateOperationsInput | number | null
+    electionId?: NullableIntFieldUpdateOperationsInput | number | null
+  }
+
+  export type VoteUncheckedUpdateManyWithoutVoterInput = {
+    id_vote?: IntFieldUpdateOperationsInput | number
+    fecha_vote?: DateTimeFieldUpdateOperationsInput | Date | string
+    hora_vote?: DateTimeFieldUpdateOperationsInput | Date | string
+    candidateId?: NullableIntFieldUpdateOperationsInput | number | null
+    electionId?: NullableIntFieldUpdateOperationsInput | number | null
+  }
+
   export type CandidateCreateManyElectionInput = {
     id_candidate?: number
     nombre_candidate: string
@@ -15807,7 +16853,10 @@ export namespace Prisma {
     num_doc_candidate: bigint | number
     correo_candidate: string
     estado_candidate: string
-    foto_candidate: string
+    foto_candidate?: string | null
+    contrasena_candidate: string
+    roleId: number
+    careerId: number
   }
 
   export type VoterCreateManyElectionInput = {
@@ -15823,6 +16872,14 @@ export namespace Prisma {
     careerId: number
   }
 
+  export type VoteCreateManyElectionInput = {
+    id_vote?: number
+    fecha_vote: Date | string
+    hora_vote: Date | string
+    voterId: number
+    candidateId?: number | null
+  }
+
   export type CandidateUpdateWithoutElectionInput = {
     nombre_candidate?: StringFieldUpdateOperationsInput | string
     apellido_candidate?: StringFieldUpdateOperationsInput | string
@@ -15830,7 +16887,10 @@ export namespace Prisma {
     num_doc_candidate?: BigIntFieldUpdateOperationsInput | bigint | number
     correo_candidate?: StringFieldUpdateOperationsInput | string
     estado_candidate?: StringFieldUpdateOperationsInput | string
-    foto_candidate?: StringFieldUpdateOperationsInput | string
+    foto_candidate?: NullableStringFieldUpdateOperationsInput | string | null
+    contrasena_candidate?: StringFieldUpdateOperationsInput | string
+    role?: RoleUpdateOneRequiredWithoutCandidatesNestedInput
+    career?: CareerUpdateOneRequiredWithoutCandidatesNestedInput
     proposals?: ProposalUpdateManyWithoutCandidateNestedInput
     result?: ResultUpdateOneWithoutCandidateNestedInput
     votes?: VoteUpdateManyWithoutCandidateNestedInput
@@ -15844,7 +16904,10 @@ export namespace Prisma {
     num_doc_candidate?: BigIntFieldUpdateOperationsInput | bigint | number
     correo_candidate?: StringFieldUpdateOperationsInput | string
     estado_candidate?: StringFieldUpdateOperationsInput | string
-    foto_candidate?: StringFieldUpdateOperationsInput | string
+    foto_candidate?: NullableStringFieldUpdateOperationsInput | string | null
+    contrasena_candidate?: StringFieldUpdateOperationsInput | string
+    roleId?: IntFieldUpdateOperationsInput | number
+    careerId?: IntFieldUpdateOperationsInput | number
     proposals?: ProposalUncheckedUpdateManyWithoutCandidateNestedInput
     result?: ResultUncheckedUpdateOneWithoutCandidateNestedInput
     votes?: VoteUncheckedUpdateManyWithoutCandidateNestedInput
@@ -15858,7 +16921,10 @@ export namespace Prisma {
     num_doc_candidate?: BigIntFieldUpdateOperationsInput | bigint | number
     correo_candidate?: StringFieldUpdateOperationsInput | string
     estado_candidate?: StringFieldUpdateOperationsInput | string
-    foto_candidate?: StringFieldUpdateOperationsInput | string
+    foto_candidate?: NullableStringFieldUpdateOperationsInput | string | null
+    contrasena_candidate?: StringFieldUpdateOperationsInput | string
+    roleId?: IntFieldUpdateOperationsInput | number
+    careerId?: IntFieldUpdateOperationsInput | number
   }
 
   export type VoterUpdateWithoutElectionInput = {
@@ -15871,7 +16937,7 @@ export namespace Prisma {
     contrasena_voter?: StringFieldUpdateOperationsInput | string
     role?: RoleUpdateOneRequiredWithoutVotersNestedInput
     career?: CareerUpdateOneRequiredWithoutVotersNestedInput
-    vote?: VoteUpdateOneWithoutVoterNestedInput
+    vote?: VoteUpdateManyWithoutVoterNestedInput
   }
 
   export type VoterUncheckedUpdateWithoutElectionInput = {
@@ -15885,7 +16951,7 @@ export namespace Prisma {
     contrasena_voter?: StringFieldUpdateOperationsInput | string
     roleId?: IntFieldUpdateOperationsInput | number
     careerId?: IntFieldUpdateOperationsInput | number
-    vote?: VoteUncheckedUpdateOneWithoutVoterNestedInput
+    vote?: VoteUncheckedUpdateManyWithoutVoterNestedInput
   }
 
   export type VoterUncheckedUpdateManyWithoutElectionInput = {
@@ -15901,6 +16967,29 @@ export namespace Prisma {
     careerId?: IntFieldUpdateOperationsInput | number
   }
 
+  export type VoteUpdateWithoutElectionInput = {
+    fecha_vote?: DateTimeFieldUpdateOperationsInput | Date | string
+    hora_vote?: DateTimeFieldUpdateOperationsInput | Date | string
+    voter?: VoterUpdateOneRequiredWithoutVoteNestedInput
+    candidate?: CandidateUpdateOneWithoutVotesNestedInput
+  }
+
+  export type VoteUncheckedUpdateWithoutElectionInput = {
+    id_vote?: IntFieldUpdateOperationsInput | number
+    fecha_vote?: DateTimeFieldUpdateOperationsInput | Date | string
+    hora_vote?: DateTimeFieldUpdateOperationsInput | Date | string
+    voterId?: IntFieldUpdateOperationsInput | number
+    candidateId?: NullableIntFieldUpdateOperationsInput | number | null
+  }
+
+  export type VoteUncheckedUpdateManyWithoutElectionInput = {
+    id_vote?: IntFieldUpdateOperationsInput | number
+    fecha_vote?: DateTimeFieldUpdateOperationsInput | Date | string
+    hora_vote?: DateTimeFieldUpdateOperationsInput | Date | string
+    voterId?: IntFieldUpdateOperationsInput | number
+    candidateId?: NullableIntFieldUpdateOperationsInput | number | null
+  }
+
   export type ProposalCreateManyCandidateInput = {
     id_proposal?: number
     titulo_proposal: string
@@ -15913,6 +17002,7 @@ export namespace Prisma {
     fecha_vote: Date | string
     hora_vote: Date | string
     voterId: number
+    electionId?: number | null
   }
 
   export type ProposalUpdateWithoutCandidateInput = {
@@ -15939,6 +17029,7 @@ export namespace Prisma {
     fecha_vote?: DateTimeFieldUpdateOperationsInput | Date | string
     hora_vote?: DateTimeFieldUpdateOperationsInput | Date | string
     voter?: VoterUpdateOneRequiredWithoutVoteNestedInput
+    election?: ElectionUpdateOneWithoutVoteNestedInput
   }
 
   export type VoteUncheckedUpdateWithoutCandidateInput = {
@@ -15946,6 +17037,7 @@ export namespace Prisma {
     fecha_vote?: DateTimeFieldUpdateOperationsInput | Date | string
     hora_vote?: DateTimeFieldUpdateOperationsInput | Date | string
     voterId?: IntFieldUpdateOperationsInput | number
+    electionId?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type VoteUncheckedUpdateManyWithoutCandidateInput = {
@@ -15953,6 +17045,7 @@ export namespace Prisma {
     fecha_vote?: DateTimeFieldUpdateOperationsInput | Date | string
     hora_vote?: DateTimeFieldUpdateOperationsInput | Date | string
     voterId?: IntFieldUpdateOperationsInput | number
+    electionId?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type VoterCreateManyCareerInput = {
@@ -15965,7 +17058,21 @@ export namespace Prisma {
     estado_voter: string
     contrasena_voter: string
     roleId: number
-    electionId: number
+    electionId?: number | null
+  }
+
+  export type CandidateCreateManyCareerInput = {
+    id_candidate?: number
+    nombre_candidate: string
+    apellido_candidate: string
+    tipo_doc_candidate: string
+    num_doc_candidate: bigint | number
+    correo_candidate: string
+    estado_candidate: string
+    foto_candidate?: string | null
+    contrasena_candidate: string
+    roleId: number
+    electionId?: number | null
   }
 
   export type VoterUpdateWithoutCareerInput = {
@@ -15977,8 +17084,8 @@ export namespace Prisma {
     estado_voter?: StringFieldUpdateOperationsInput | string
     contrasena_voter?: StringFieldUpdateOperationsInput | string
     role?: RoleUpdateOneRequiredWithoutVotersNestedInput
-    election?: ElectionUpdateOneRequiredWithoutVotersNestedInput
-    vote?: VoteUpdateOneWithoutVoterNestedInput
+    election?: ElectionUpdateOneWithoutVotersNestedInput
+    vote?: VoteUpdateManyWithoutVoterNestedInput
   }
 
   export type VoterUncheckedUpdateWithoutCareerInput = {
@@ -15991,8 +17098,8 @@ export namespace Prisma {
     estado_voter?: StringFieldUpdateOperationsInput | string
     contrasena_voter?: StringFieldUpdateOperationsInput | string
     roleId?: IntFieldUpdateOperationsInput | number
-    electionId?: IntFieldUpdateOperationsInput | number
-    vote?: VoteUncheckedUpdateOneWithoutVoterNestedInput
+    electionId?: NullableIntFieldUpdateOperationsInput | number | null
+    vote?: VoteUncheckedUpdateManyWithoutVoterNestedInput
   }
 
   export type VoterUncheckedUpdateManyWithoutCareerInput = {
@@ -16005,7 +17112,54 @@ export namespace Prisma {
     estado_voter?: StringFieldUpdateOperationsInput | string
     contrasena_voter?: StringFieldUpdateOperationsInput | string
     roleId?: IntFieldUpdateOperationsInput | number
-    electionId?: IntFieldUpdateOperationsInput | number
+    electionId?: NullableIntFieldUpdateOperationsInput | number | null
+  }
+
+  export type CandidateUpdateWithoutCareerInput = {
+    nombre_candidate?: StringFieldUpdateOperationsInput | string
+    apellido_candidate?: StringFieldUpdateOperationsInput | string
+    tipo_doc_candidate?: StringFieldUpdateOperationsInput | string
+    num_doc_candidate?: BigIntFieldUpdateOperationsInput | bigint | number
+    correo_candidate?: StringFieldUpdateOperationsInput | string
+    estado_candidate?: StringFieldUpdateOperationsInput | string
+    foto_candidate?: NullableStringFieldUpdateOperationsInput | string | null
+    contrasena_candidate?: StringFieldUpdateOperationsInput | string
+    role?: RoleUpdateOneRequiredWithoutCandidatesNestedInput
+    election?: ElectionUpdateOneWithoutCandidatesNestedInput
+    proposals?: ProposalUpdateManyWithoutCandidateNestedInput
+    result?: ResultUpdateOneWithoutCandidateNestedInput
+    votes?: VoteUpdateManyWithoutCandidateNestedInput
+  }
+
+  export type CandidateUncheckedUpdateWithoutCareerInput = {
+    id_candidate?: IntFieldUpdateOperationsInput | number
+    nombre_candidate?: StringFieldUpdateOperationsInput | string
+    apellido_candidate?: StringFieldUpdateOperationsInput | string
+    tipo_doc_candidate?: StringFieldUpdateOperationsInput | string
+    num_doc_candidate?: BigIntFieldUpdateOperationsInput | bigint | number
+    correo_candidate?: StringFieldUpdateOperationsInput | string
+    estado_candidate?: StringFieldUpdateOperationsInput | string
+    foto_candidate?: NullableStringFieldUpdateOperationsInput | string | null
+    contrasena_candidate?: StringFieldUpdateOperationsInput | string
+    roleId?: IntFieldUpdateOperationsInput | number
+    electionId?: NullableIntFieldUpdateOperationsInput | number | null
+    proposals?: ProposalUncheckedUpdateManyWithoutCandidateNestedInput
+    result?: ResultUncheckedUpdateOneWithoutCandidateNestedInput
+    votes?: VoteUncheckedUpdateManyWithoutCandidateNestedInput
+  }
+
+  export type CandidateUncheckedUpdateManyWithoutCareerInput = {
+    id_candidate?: IntFieldUpdateOperationsInput | number
+    nombre_candidate?: StringFieldUpdateOperationsInput | string
+    apellido_candidate?: StringFieldUpdateOperationsInput | string
+    tipo_doc_candidate?: StringFieldUpdateOperationsInput | string
+    num_doc_candidate?: BigIntFieldUpdateOperationsInput | bigint | number
+    correo_candidate?: StringFieldUpdateOperationsInput | string
+    estado_candidate?: StringFieldUpdateOperationsInput | string
+    foto_candidate?: NullableStringFieldUpdateOperationsInput | string | null
+    contrasena_candidate?: StringFieldUpdateOperationsInput | string
+    roleId?: IntFieldUpdateOperationsInput | number
+    electionId?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type VoterCreateManyRoleInput = {
@@ -16017,8 +17171,22 @@ export namespace Prisma {
     correo_voter: string
     estado_voter: string
     contrasena_voter: string
-    electionId: number
+    electionId?: number | null
     careerId: number
+  }
+
+  export type CandidateCreateManyRoleInput = {
+    id_candidate?: number
+    nombre_candidate: string
+    apellido_candidate: string
+    tipo_doc_candidate: string
+    num_doc_candidate: bigint | number
+    correo_candidate: string
+    estado_candidate: string
+    foto_candidate?: string | null
+    contrasena_candidate: string
+    careerId: number
+    electionId?: number | null
   }
 
   export type VoterUpdateWithoutRoleInput = {
@@ -16029,9 +17197,9 @@ export namespace Prisma {
     correo_voter?: StringFieldUpdateOperationsInput | string
     estado_voter?: StringFieldUpdateOperationsInput | string
     contrasena_voter?: StringFieldUpdateOperationsInput | string
-    election?: ElectionUpdateOneRequiredWithoutVotersNestedInput
+    election?: ElectionUpdateOneWithoutVotersNestedInput
     career?: CareerUpdateOneRequiredWithoutVotersNestedInput
-    vote?: VoteUpdateOneWithoutVoterNestedInput
+    vote?: VoteUpdateManyWithoutVoterNestedInput
   }
 
   export type VoterUncheckedUpdateWithoutRoleInput = {
@@ -16043,9 +17211,9 @@ export namespace Prisma {
     correo_voter?: StringFieldUpdateOperationsInput | string
     estado_voter?: StringFieldUpdateOperationsInput | string
     contrasena_voter?: StringFieldUpdateOperationsInput | string
-    electionId?: IntFieldUpdateOperationsInput | number
+    electionId?: NullableIntFieldUpdateOperationsInput | number | null
     careerId?: IntFieldUpdateOperationsInput | number
-    vote?: VoteUncheckedUpdateOneWithoutVoterNestedInput
+    vote?: VoteUncheckedUpdateManyWithoutVoterNestedInput
   }
 
   export type VoterUncheckedUpdateManyWithoutRoleInput = {
@@ -16057,8 +17225,55 @@ export namespace Prisma {
     correo_voter?: StringFieldUpdateOperationsInput | string
     estado_voter?: StringFieldUpdateOperationsInput | string
     contrasena_voter?: StringFieldUpdateOperationsInput | string
-    electionId?: IntFieldUpdateOperationsInput | number
+    electionId?: NullableIntFieldUpdateOperationsInput | number | null
     careerId?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type CandidateUpdateWithoutRoleInput = {
+    nombre_candidate?: StringFieldUpdateOperationsInput | string
+    apellido_candidate?: StringFieldUpdateOperationsInput | string
+    tipo_doc_candidate?: StringFieldUpdateOperationsInput | string
+    num_doc_candidate?: BigIntFieldUpdateOperationsInput | bigint | number
+    correo_candidate?: StringFieldUpdateOperationsInput | string
+    estado_candidate?: StringFieldUpdateOperationsInput | string
+    foto_candidate?: NullableStringFieldUpdateOperationsInput | string | null
+    contrasena_candidate?: StringFieldUpdateOperationsInput | string
+    career?: CareerUpdateOneRequiredWithoutCandidatesNestedInput
+    election?: ElectionUpdateOneWithoutCandidatesNestedInput
+    proposals?: ProposalUpdateManyWithoutCandidateNestedInput
+    result?: ResultUpdateOneWithoutCandidateNestedInput
+    votes?: VoteUpdateManyWithoutCandidateNestedInput
+  }
+
+  export type CandidateUncheckedUpdateWithoutRoleInput = {
+    id_candidate?: IntFieldUpdateOperationsInput | number
+    nombre_candidate?: StringFieldUpdateOperationsInput | string
+    apellido_candidate?: StringFieldUpdateOperationsInput | string
+    tipo_doc_candidate?: StringFieldUpdateOperationsInput | string
+    num_doc_candidate?: BigIntFieldUpdateOperationsInput | bigint | number
+    correo_candidate?: StringFieldUpdateOperationsInput | string
+    estado_candidate?: StringFieldUpdateOperationsInput | string
+    foto_candidate?: NullableStringFieldUpdateOperationsInput | string | null
+    contrasena_candidate?: StringFieldUpdateOperationsInput | string
+    careerId?: IntFieldUpdateOperationsInput | number
+    electionId?: NullableIntFieldUpdateOperationsInput | number | null
+    proposals?: ProposalUncheckedUpdateManyWithoutCandidateNestedInput
+    result?: ResultUncheckedUpdateOneWithoutCandidateNestedInput
+    votes?: VoteUncheckedUpdateManyWithoutCandidateNestedInput
+  }
+
+  export type CandidateUncheckedUpdateManyWithoutRoleInput = {
+    id_candidate?: IntFieldUpdateOperationsInput | number
+    nombre_candidate?: StringFieldUpdateOperationsInput | string
+    apellido_candidate?: StringFieldUpdateOperationsInput | string
+    tipo_doc_candidate?: StringFieldUpdateOperationsInput | string
+    num_doc_candidate?: BigIntFieldUpdateOperationsInput | bigint | number
+    correo_candidate?: StringFieldUpdateOperationsInput | string
+    estado_candidate?: StringFieldUpdateOperationsInput | string
+    foto_candidate?: NullableStringFieldUpdateOperationsInput | string | null
+    contrasena_candidate?: StringFieldUpdateOperationsInput | string
+    careerId?: IntFieldUpdateOperationsInput | number
+    electionId?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
 

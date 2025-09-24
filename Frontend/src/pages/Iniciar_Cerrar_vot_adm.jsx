@@ -1,52 +1,75 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 import Navbar_admin from "../components/Navbar_admin";
 
 const Iniciar_Cerrar_vot_adm = () => {
   const [elecciones, setElecciones] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    // Simulación de datos de elecciones
-    const data = [
-      { id: 1, nombre: "Elección Consejo Estudiantil 2025", estado: "Pendiente" },
-      { id: 2, nombre: "Elección Representante Docente 2024", estado: "Finalizada" },
-      { id: 3, nombre: "Elección Alcaldía Estudiantil", estado: "Activa" },
-    ];
-    setElecciones(data);
+    fetchElections();
   }, []);
 
-  // Función para iniciar una elección
-  const iniciarEleccion = (id) => {
-    // En un caso real, aquí harías una llamada a tu backend
-    console.log(`Iniciando la elección con ID: ${id}`);
-    setElecciones(
-      elecciones.map((eleccion) =>
-        eleccion.id === id ? { ...eleccion, estado: "Activa" } : eleccion
-      )
-    );
+  const fetchElections = async () => {
+    try {
+      setLoading(true);
+      const response = await axios.get("http://localhost:3000/elections");
+      setElecciones(response.data);
+      setError(null);
+    } catch (err) {
+      setError("Error al cargar las elecciones.");
+      console.error(err);
+    } finally {
+      setLoading(false);
+    }
   };
 
-  // Función para cerrar una elección
-  const cerrarEleccion = (id) => {
-    // En un caso real, aquí harías una llamada a tu backend
-    console.log(`Cerrando la elección con ID: ${id}`);
-    setElecciones(
-      elecciones.map((eleccion) =>
-        eleccion.id === id ? { ...eleccion, estado: "Finalizada" } : eleccion
-      )
-    );
+  const iniciarEleccion = async (id) => {
+    try {
+      await axios.put(`http://localhost:3000/elections/iniciar/${id}`);
+      fetchElections(); // Recargar la lista de elecciones
+    } catch (err) {
+      setError("Error al iniciar la elección.");
+      console.error(err);
+    }
   };
+
+  const cerrarEleccion = async (id) => {
+    try {
+      await axios.put(`http://localhost:3000/elections/cerrar/${id}`);
+      fetchElections(); // Recargar la lista de elecciones
+    } catch (err) {
+      setError("Error al cerrar la elección.");
+      console.error(err);
+    }
+  };
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gray-100">
+        <p className="text-xl font-semibold text-gray-700">Cargando...</p>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gray-100">
+        <p className="text-xl font-semibold text-red-600">
+          Error: {error}.
+        </p>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gray-100">
-      {/* Navbar administrador */}
       <Navbar_admin />
-
-      {/* Contenido */}
       <div className="pt-24 px-6">
         <h1 className="text-3xl font-bold mb-6 text-center text-blue-900">
           Gestión de Elecciones
         </h1>
-
         {elecciones.length === 0 ? (
           <p className="text-gray-600 text-center">
             No hay elecciones registradas para gestionar.
@@ -64,23 +87,23 @@ const Iniciar_Cerrar_vot_adm = () => {
               </thead>
               <tbody>
                 {elecciones.map((eleccion) => (
-                  <tr key={eleccion.id} className="hover:bg-gray-100 text-center">
-                    <td className="p-3 border">{eleccion.id}</td>
-                    <td className="p-3 border">{eleccion.nombre}</td>
-                    <td className="p-3 border">{eleccion.estado}</td>
+                  <tr key={eleccion.id_election} className="hover:bg-gray-100 text-center">
+                    <td className="p-3 border">{eleccion.id_election}</td>
+                    <td className="p-3 border">{eleccion.nombre_election}</td>
+                    <td className="p-3 border">{eleccion.estado_election}</td>
                     <td className="p-3 border">
-                      {eleccion.estado === "Activa" ? (
+                      {eleccion.estado_election === "Activa" ? (
                         <button
-                          onClick={() => cerrarEleccion(eleccion.id)}
+                          onClick={() => cerrarEleccion(eleccion.id_election)}
                           className="bg-red-600 text-white px-3 py-1 rounded-lg hover:bg-red-700 transition mx-1"
                         >
                           Cerrar
                         </button>
                       ) : (
                         <button
-                          onClick={() => iniciarEleccion(eleccion.id)}
+                          onClick={() => iniciarEleccion(eleccion.id_election)}
                           className="bg-green-600 text-white px-3 py-1 rounded-lg hover:bg-green-700 transition mx-1"
-                          disabled={eleccion.estado === "Finalizada"}
+                          disabled={eleccion.estado_election === "Finalizada"}
                         >
                           Iniciar
                         </button>
