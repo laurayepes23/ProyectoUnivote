@@ -10,7 +10,6 @@ import { LoginVoterDto } from './dto/login-voter.dto';
 export class VotersController {
     constructor(private readonly votersService: VotersService) { }
 
-    //Crear un votante
     @Post()
     create(@Body() createVoterDto: CreateVoterDto) {
         return this.votersService.create(createVoterDto);
@@ -26,13 +25,11 @@ export class VotersController {
         };
     }
 
-    //Consultar todos los votantes
     @Get()
     findAll() {
         return this.votersService.findAll();
     }
 
-    //Consultar votante por ID
     @Get(':id')
     findOne(@Param('id') id: string) {
         return this.votersService.findOne(+id);
@@ -43,7 +40,6 @@ export class VotersController {
         return this.votersService.update(+id, updateVoterDto);
     }
 
-    //Borrar el votante por ID
     @Delete(':id')
     remove(@Param('id') id: string) {
         return this.votersService.remove(+id);

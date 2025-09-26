@@ -31,7 +31,6 @@ import Registro_candidato from "./pages/Registro_candidato";
 import Candidato from "./pages/Candidato";
 import PostularseElecciones from "./pages/PostularseElecciones";
 import ConsultarFunciones from "./pages/ConsultarFunciones";
-import ConsultarCargosCandidato from "./pages/ConsultarCargosCandidato";
 import GestionarPropuestas from "./pages/GestionarPropuestas";
 import CrearPropuesta from "./pages/CrearPropuesta";
 import MiPerfilCandidato from "./pages/MiPerfilCandidato";
@@ -72,7 +71,6 @@ export default function App() {
           <Route path="/Candidato" element={<Candidato />} />
           <Route path="/PostularseElecciones" element={<PostularseElecciones />} />
           <Route path="/ConsultarFunciones" element={<ConsultarFunciones />} />
-          <Route path="/ConsultarCargosCandidato" element={<ConsultarCargosCandidato />} />
           <Route path="/GestionarPropuestas" element={<GestionarPropuestas />} />
           <Route path="/CrearPropuesta" element={<CrearPropuesta />} />
           <Route path="/MiPerfilCandidato" element={<MiPerfilCandidato />} />

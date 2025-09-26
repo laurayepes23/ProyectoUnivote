@@ -34,7 +34,6 @@ export class VotesService {
         const existingVote = await this.prisma.vote.findFirst({
             where: {
                 voterId: voterId,
-                // CORRECCIÓN AQUÍ: Filtrar a través de la relación anidada 'candidate' -> 'election'
                 candidate: {
                     election: {
                         id_election: electionId
@@ -53,7 +52,9 @@ export class VotesService {
                 fecha_vote: new Date(), // Generado en el servidor
                 hora_vote: new Date(),  // Generado en el servidor
                 voter: { connect: { id_voter: voterId } },
-                candidate: { connect: { id_candidate: candidateId } }
+                candidate: { connect: { id_candidate: candidateId } },
+                election: { connect: { id_election: electionId } }
+
             },
             include: {
                 voter: true,

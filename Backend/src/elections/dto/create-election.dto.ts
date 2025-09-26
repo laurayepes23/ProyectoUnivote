@@ -23,5 +23,5 @@ export class CreateElectionDto {
 
     @IsNumber()
     @IsNotEmpty()
-    admin_id: number;
+    id_admin: number;
 }

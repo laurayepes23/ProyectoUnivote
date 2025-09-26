@@ -36,8 +36,19 @@ export class ElectionsService {
   }
 
   async create(createElectionDto: CreateElectionDto) {
+    // Desestructuramos el DTO para separar el id_admin del resto de los datos.
+    const { id_admin, ...electionData } = createElectionDto;
+
+    // Llama a Prisma con la estructura de datos anidada correcta.
     return this.prisma.election.create({
-      data: createElectionDto,
+      data: {
+        ...electionData, 
+        administrador: {
+          connect: {
+            id_admin: id_admin, 
+          },
+        },
+      },
       include: {
         administrador: true,
         candidates: true,
@@ -91,6 +102,8 @@ export class ElectionsService {
   }
 
   async update(id: number, updateElectionDto: UpdateElectionDto) {
+    // Nota: Si tu UpdateElectionDto también incluye 'id_admin',
+    // necesitarás aplicar una lógica similar a la del método 'create'.
     return this.prisma.election.update({
       where: { id_election: id },
       data: updateElectionDto,

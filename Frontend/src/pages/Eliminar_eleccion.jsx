@@ -96,20 +96,19 @@ const Eliminar_eleccion_adm = () => {
                                             <tr key={eleccion.id_election} className="text-center hover:bg-gray-100">
                                                 <td className="px-4 py-2 border">{eleccion.id_election}</td>
                                                 <td className="px-4 py-2 border">{eleccion.nombre_election}</td>
+                                                
                                                 <td className="px-4 py-2 border">
-                                                    {eleccion.fecha_inicio
-                                                      ? new Date(eleccion.fecha_inicio).toLocaleDateString('es-ES')
-                                                      : 'N/A'}
+                                                    {eleccion.fecha_inicio || 'Invalid Date'}
                                                 </td>
                                                 <td className="px-4 py-2 border">
-                                                    {eleccion.fecha_fin
-                                                      ? new Date(eleccion.fecha_fin).toLocaleDateString('es-ES')
-                                                      : 'N/A'}
+                                                    {eleccion.fecha_fin || 'Invalid Date'}
                                                 </td>
                                                 <td
                                                     className={`px-4 py-2 border font-semibold ${
-                                                        eleccion.estado_election === "Pendiente"
+                                                        eleccion.estado_election === "Programada"
                                                             ? "text-yellow-600"
+                                                            : eleccion.estado_election === "Finalizada"
+                                                            ? "text-red-600"
                                                             : "text-green-600"
                                                     }`}
                                                 >

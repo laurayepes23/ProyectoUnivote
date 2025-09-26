@@ -18,7 +18,7 @@ const Crear_eleccion_adm = () => {
         nombre: "",
         fechaInicio: "",
         fechaFin: "",
-        estado: "Pendiente",
+        estado: "Programada",
     });
 
     // Función para obtener las elecciones de la API
@@ -57,7 +57,7 @@ const Crear_eleccion_adm = () => {
                 fecha_inicio: new Date(formData.fechaInicio).toISOString(),
                 fecha_fin: new Date(formData.fechaFin).toISOString(),
                 estado_election: formData.estado,
-                admin_id: 3, 
+                id_admin: 1, 
             };
 
             const response = await axios.post(API_BASE_URL, dataToSend);
@@ -156,7 +156,7 @@ const Crear_eleccion_adm = () => {
                             onChange={handleChange}
                             className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:ring-blue-300"
                         >
-                            <option value="Pendiente">Pendiente</option>
+                            <option value="Programada">Programada</option>
                             <option value="En curso">En curso</option>
                             <option value="Finalizada">Finalizada</option>
                         </select>
@@ -198,10 +198,10 @@ const Crear_eleccion_adm = () => {
                                                 <td className="px-4 py-2 border">{eleccion.id_election}</td>
                                                 <td className="px-4 py-2 border">{eleccion.nombre_election}</td>
                                                 <td className="px-4 py-2 border">
-                                                    {new Date(eleccion.fecha_inicio).toLocaleString()}
+                                                    {eleccion.fecha_inicio || 'Invalid Date'}
                                                 </td>
                                                 <td className="px-4 py-2 border">
-                                                    {new Date(eleccion.fecha_fin).toLocaleString()}
+                                                    {eleccion.fecha_fin || 'Invalid Date'}
                                                 </td>
                                                 <td
                                                     className={`px-4 py-2 border font-semibold ${
